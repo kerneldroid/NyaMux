@@ -163,7 +163,7 @@ string getJniResultString(const int retvalParam, const int errnoParam,
 /* Get "com/termux/shared/jni/models/JniResult" object that can be returned as result for a JNI call. */
 jobject getJniResult(JNIEnv *env, jstring title, const int retvalParam, const int errnoParam,
                      string errmsgParam, const int intDataParam) {
-    jclass clazz = env->FindClass("com/termux/shared/jni/models/JniResult");
+    jclass clazz = env->FindClass("com/nyamux/shared/jni/models/JniResult");
     if (checkJniException(env)) return NULL;
     if (!clazz) {
         log_error(get_title_and_message(env, title,
