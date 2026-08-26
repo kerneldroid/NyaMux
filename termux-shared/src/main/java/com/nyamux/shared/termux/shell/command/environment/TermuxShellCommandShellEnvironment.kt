@@ -1,0 +1,53 @@
+package com.nyamux.shared.termux.shell.command.environment
+
+import android.content.Context
+import com.nyamux.shared.shell.command.ExecutionCommand
+import com.nyamux.shared.shell.command.environment.ShellCommandShellEnvironment
+import com.nyamux.shared.shell.command.environment.ShellEnvironmentUtils
+import com.nyamux.shared.termux.settings.preferences.TermuxAppSharedPreferences
+import com.nyamux.shared.termux.shell.TermuxShellManager
+import java.util.HashMap
+
+/**
+ * Environment for Termux {@link ExecutionCommand}.
+ */
+open class TermuxShellCommandShellEnvironment : ShellCommandShellEnvironment() {
+
+    /** Get shell environment containing info for Termux {@link ExecutionCommand}. */
+    override fun getEnvironment(
+        currentPackageContext: Context,
+        executionCommand: ExecutionCommand
+    ): HashMap<String, String> {
+        val environment = super.getEnvironment(currentPackageContext, executionCommand)
+
+        val preferences = TermuxAppSharedPreferences.build(currentPackageContext) ?: return environment
+
+        if (ExecutionCommand.Runner.APP_SHELL.equalsRunner(executionCommand.runner)) {
+            ShellEnvironmentUtils.putToEnvIfSet(
+                environment,
+                ENV_SHELL_CMD__APP_SHELL_NUMBER_SINCE_BOOT,
+                preferences.getAndIncrementAppShellNumberSinceBoot().toString()
+            )
+            ShellEnvironmentUtils.putToEnvIfSet(
+                environment,
+                ENV_SHELL_CMD__APP_SHELL_NUMBER_SINCE_APP_START,
+                TermuxShellManager.getAndIncrementAppShellNumberSinceAppStart().toString()
+            )
+        } else if (ExecutionCommand.Runner.TERMINAL_SESSION.equalsRunner(executionCommand.runner)) {
+            ShellEnvironmentUtils.putToEnvIfSet(
+                environment,
+                ENV_SHELL_CMD__TERMINAL_SESSION_NUMBER_SINCE_BOOT,
+                preferences.getAndIncrementTerminalSessionNumberSinceBoot().toString()
+            )
+            ShellEnvironmentUtils.putToEnvIfSet(
+                environment,
+                ENV_SHELL_CMD__TERMINAL_SESSION_NUMBER_SINCE_APP_START,
+                TermuxShellManager.getAndIncrementTerminalSessionNumberSinceAppStart().toString()
+            )
+        } else {
+            return environment
+        }
+
+        return environment
+    }
+}

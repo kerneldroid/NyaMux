@@ -2,11 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
 android {
-    namespace "com.termux.view"
+    namespace "com.nyamux.view"
     compileSdk project.properties.compileSdkVersion.toInteger()
 
     dependencies {
-        implementation "androidx.annotation:annotation:1.9.0"
+        implementation "androidx.annotation:annotation:1.10.0"
         api project(":terminal-emulator")
     }
 
@@ -52,7 +52,7 @@ afterEvaluate {
             // Creates a Maven publication called "release".
             release(MavenPublication) {
                 from components.default
-                groupId = 'com.termux'
+                groupId = 'com.nyamux'
                 artifactId = 'terminal-view'
                 version = '0.118.0'
                 artifact(sourceJar)

@@ -252,7 +252,7 @@ string setStringField(JNIEnv *env, jobject obj, jclass clazz, const string field
 
 extern "C"
 JNIEXPORT jobject JNICALL
-Java_com_termux_shared_net_socket_local_LocalSocketManager_createServerSocketNative(JNIEnv *env, jclass clazz,
+Java_com_nyamux_shared_net_socket_local_LocalSocketManager_createServerSocketNative(JNIEnv *env, jclass clazz,
                                                                                     jstring logTitle,
                                                                                     jbyteArray pathArray,
                                                                                     jint backlog) {
@@ -316,7 +316,7 @@ Java_com_termux_shared_net_socket_local_LocalSocketManager_createServerSocketNat
 
 extern "C"
 JNIEXPORT jobject JNICALL
-Java_com_termux_shared_net_socket_local_LocalSocketManager_closeSocketNative(JNIEnv *env, jclass clazz,
+Java_com_nyamux_shared_net_socket_local_LocalSocketManager_closeSocketNative(JNIEnv *env, jclass clazz,
                                                                              jstring logTitle, jint fd) {
     if (fd < 0) {
         return getJniResult(env, logTitle, -1, "closeSocketNative(): Invalid fd \"" + to_string(fd) + "\" passed");
@@ -332,7 +332,7 @@ Java_com_termux_shared_net_socket_local_LocalSocketManager_closeSocketNative(JNI
 
 extern "C"
 JNIEXPORT jobject JNICALL
-Java_com_termux_shared_net_socket_local_LocalSocketManager_acceptNative(JNIEnv *env, jclass clazz,
+Java_com_nyamux_shared_net_socket_local_LocalSocketManager_acceptNative(JNIEnv *env, jclass clazz,
                                                                         jstring logTitle, jint fd) {
     if (fd < 0) {
         return getJniResult(env, logTitle, -1, "acceptNative(): Invalid fd \"" + to_string(fd) + "\" passed");
@@ -350,7 +350,7 @@ Java_com_termux_shared_net_socket_local_LocalSocketManager_acceptNative(JNIEnv *
 
 extern "C"
 JNIEXPORT jobject JNICALL
-Java_com_termux_shared_net_socket_local_LocalSocketManager_readNative(JNIEnv *env, jclass clazz,
+Java_com_nyamux_shared_net_socket_local_LocalSocketManager_readNative(JNIEnv *env, jclass clazz,
                                                                       jstring logTitle,
                                                                       jint fd, jbyteArray dataArray,
                                                                       jlong deadline) {
@@ -413,7 +413,7 @@ Java_com_termux_shared_net_socket_local_LocalSocketManager_readNative(JNIEnv *en
 
 extern "C"
 JNIEXPORT jobject JNICALL
-Java_com_termux_shared_net_socket_local_LocalSocketManager_sendNative(JNIEnv *env, jclass clazz,
+Java_com_nyamux_shared_net_socket_local_LocalSocketManager_sendNative(JNIEnv *env, jclass clazz,
                                                                       jstring logTitle,
                                                                       jint fd, jbyteArray dataArray,
                                                                       jlong deadline) {
@@ -470,7 +470,7 @@ Java_com_termux_shared_net_socket_local_LocalSocketManager_sendNative(JNIEnv *en
 
 extern "C"
 JNIEXPORT jobject JNICALL
-Java_com_termux_shared_net_socket_local_LocalSocketManager_availableNative(JNIEnv *env, jclass clazz,
+Java_com_nyamux_shared_net_socket_local_LocalSocketManager_availableNative(JNIEnv *env, jclass clazz,
                                                                            jstring logTitle, jint fd) {
     if (fd < 0) {
         return getJniResult(env, logTitle, -1, "availableNative(): Invalid fd \"" + to_string(fd) + "\" passed");
@@ -495,7 +495,7 @@ int set_socket_timeout(int fd, int option, int timeout) {
 
 extern "C"
 JNIEXPORT jobject JNICALL
-Java_com_termux_shared_net_socket_local_LocalSocketManager_setSocketReadTimeoutNative(JNIEnv *env, jclass clazz,
+Java_com_nyamux_shared_net_socket_local_LocalSocketManager_setSocketReadTimeoutNative(JNIEnv *env, jclass clazz,
                                                                                       jstring logTitle,
                                                                                       jint fd, jint timeout) {
     if (fd < 0) {
@@ -513,7 +513,7 @@ Java_com_termux_shared_net_socket_local_LocalSocketManager_setSocketReadTimeoutN
 
 extern "C"
 JNIEXPORT jobject JNICALL
-Java_com_termux_shared_net_socket_local_LocalSocketManager_setSocketSendTimeoutNative(JNIEnv *env, jclass clazz,
+Java_com_nyamux_shared_net_socket_local_LocalSocketManager_setSocketSendTimeoutNative(JNIEnv *env, jclass clazz,
                                                                                       jstring logTitle,
                                                                                       jint fd, jint timeout) {
     if (fd < 0) {
@@ -532,7 +532,7 @@ Java_com_termux_shared_net_socket_local_LocalSocketManager_setSocketSendTimeoutN
 
 extern "C"
 JNIEXPORT jobject JNICALL
-Java_com_termux_shared_net_socket_local_LocalSocketManager_getPeerCredNative(JNIEnv *env, jclass clazz,
+Java_com_nyamux_shared_net_socket_local_LocalSocketManager_getPeerCredNative(JNIEnv *env, jclass clazz,
                                                                              jstring logTitle,
                                                                              jint fd, jobject peerCred) {
     if (fd < 0) {
@@ -553,7 +553,7 @@ Java_com_termux_shared_net_socket_local_LocalSocketManager_getPeerCredNative(JNI
         return getJniResult(env, logTitle, -1, errno, "getPeerCredNative(): Failed to get peer credentials for fd " + to_string(fd));
     }
 
-    // Fill "com.termux.shared.net.socket.local.PeerCred" object.
+    // Fill "com.nyamux.shared.net.socket.local.PeerCred" object.
     // The pid, uid and gid will always be set based on ucred.
     // The pname and cmdline will only be set if current process has access to "/proc/[pid]/cmdline"
     // of peer process. Processes of other users/apps are not normally accessible.

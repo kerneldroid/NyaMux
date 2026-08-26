@@ -6,24 +6,16 @@ plugins {
     id "org.jetbrains.kotlin.plugin.compose"
 }
 
-def localProps = new Properties()
-def localPropsFile = rootProject.file('local.properties')
-if (localPropsFile.exists()) {
-    localProps.load(localPropsFile.newDataInputStream())
-}
+apply from: "$rootDir/gradle/signing.gradle"
 
 ext {
-    // The packageVariant defines the bootstrap variant that will be included in the app APK.
-    // This must be supported by com.termux.shared.termux.TermuxBootstrap.PackageVariant or app will
-    // crash at startup.
-    // Bootstrap of a different variant must not be manually installed by the user after app installation
-    // by replacing $PREFIX since app code is dependant on the variant used to build the APK.
-    // Currently supported values are: [ "apt-android-7" "apt-android-5" ]
-    packageVariant = System.getenv("TERMUX_PACKAGE_VARIANT") ?: "apt-android-7" // Default: "apt-android-7"
+    // Bootstrap variant embedded in the APK; must match the values supported by
+    // TermuxBootstrap.PackageVariant ("apt-android-7" or "apt-android-5").
+    packageVariant = System.getenv("TERMUX_PACKAGE_VARIANT") ?: "apt-android-7"
 }
 
 android {
-    namespace "com.termux"
+    namespace "com.nyamux"
 
     compileSdk project.properties.compileSdkVersion.toInteger()
     ndkVersion = System.getenv("JITPACK_NDK_VERSION") ?: project.properties.ndkVersion
@@ -33,25 +25,18 @@ android {
     def splitAPKsForReleaseBuilds = System.getenv("TERMUX_SPLIT_APKS_FOR_RELEASE_BUILDS") ?: "0" // F-Droid does not support split APKs #1904
 
     dependencies {
-        implementation "androidx.annotation:annotation:1.9.0"
-        implementation "androidx.core:core-ktx:1.15.0"
-        implementation "androidx.drawerlayout:drawerlayout:1.2.0"
-        implementation "androidx.preference:preference:1.2.1"
-        implementation "androidx.viewpager:viewpager:1.0.0"
-        implementation "com.google.android.material:material:1.12.0"
-        implementation "com.google.guava:guava:33.4.0-jre"
-        implementation "io.noties.markwon:core:$markwonVersion"
-        implementation "io.noties.markwon:ext-strikethrough:$markwonVersion"
-        implementation "io.noties.markwon:linkify:$markwonVersion"
-        implementation "io.noties.markwon:recycler:$markwonVersion"
+        implementation "androidx.annotation:annotation:1.10.0"
+        implementation "androidx.core:core-ktx:1.19.0"
+        implementation "com.google.android.material:material:1.14.0"
+        implementation "com.google.guava:guava:33.7.1-android"
         implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
         // Compose dependencies
-        def composeBom = platform('androidx.compose:compose-bom:2026.06.00')
+        def composeBom = platform('androidx.compose:compose-bom:2026.08.00')
         implementation composeBom
         implementation "androidx.activity:activity-compose:1.13.0"
         implementation "androidx.compose.ui:ui"
-        implementation "androidx.compose.material3:material3:1.5.0-alpha22"
+        implementation "androidx.compose.material3:material3:1.5.0-alpha26"
         implementation "androidx.compose.ui:ui-text-google-fonts"
         implementation "androidx.compose.material:material-icons-extended"
 
@@ -72,14 +57,14 @@ android {
 
         buildConfigField "String", "TERMUX_PACKAGE_VARIANT", "\"" + project.ext.packageVariant + "\"" // Used by TermuxApplication class
 
-        manifestPlaceholders.TERMUX_PACKAGE_NAME = "com.termux"
-        manifestPlaceholders.TERMUX_APP_NAME = "Termux"
-        manifestPlaceholders.TERMUX_API_APP_NAME = "Termux:API"
-        manifestPlaceholders.TERMUX_BOOT_APP_NAME = "Termux:Boot"
-        manifestPlaceholders.TERMUX_FLOAT_APP_NAME = "Termux:Float"
-        manifestPlaceholders.TERMUX_STYLING_APP_NAME = "Termux:Styling"
-        manifestPlaceholders.TERMUX_TASKER_APP_NAME = "Termux:Tasker"
-        manifestPlaceholders.TERMUX_WIDGET_APP_NAME = "Termux:Widget"
+        manifestPlaceholders.TERMUX_PACKAGE_NAME = "com.nyamux"
+        manifestPlaceholders.TERMUX_APP_NAME = "Nyamux"
+        manifestPlaceholders.TERMUX_API_APP_NAME = "Nyamux:API"
+        manifestPlaceholders.TERMUX_BOOT_APP_NAME = "Nyamux:Boot"
+        manifestPlaceholders.TERMUX_FLOAT_APP_NAME = "Nyamux:Float"
+        manifestPlaceholders.TERMUX_STYLING_APP_NAME = "Nyamux:Styling"
+        manifestPlaceholders.TERMUX_TASKER_APP_NAME = "Nyamux:Tasker"
+        manifestPlaceholders.TERMUX_WIDGET_APP_NAME = "Nyamux:Widget"
 
         externalNativeBuild {
             ndkBuild {
@@ -95,21 +80,6 @@ android {
                 include 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
                 universalApk true
             }
-        }
-    }
-
-    signingConfigs {
-        debug {
-            storeFile file('testkey_untrusted.jks')
-            keyAlias 'alias'
-            storePassword System.getenv("TERMUX_DEBUG_STORE_PASSWORD") ?: localProps.getProperty('TERMUX_DEBUG_STORE_PASSWORD', 'android')
-            keyPassword System.getenv("TERMUX_DEBUG_KEY_PASSWORD") ?: localProps.getProperty('TERMUX_DEBUG_KEY_PASSWORD', 'android')
-        }
-        release {
-            storeFile file(System.getenv("TERMUX_RELEASE_STORE_FILE") ?: localProps.getProperty('TERMUX_RELEASE_STORE_FILE', '../release.jks'))
-            storePassword System.getenv("TERMUX_RELEASE_STORE_PASSWORD") ?: localProps.getProperty('TERMUX_RELEASE_STORE_PASSWORD', '')
-            keyAlias System.getenv("TERMUX_RELEASE_KEY_ALIAS") ?: localProps.getProperty('TERMUX_RELEASE_KEY_ALIAS', 'release')
-            keyPassword System.getenv("TERMUX_RELEASE_KEY_PASSWORD") ?: localProps.getProperty('TERMUX_RELEASE_KEY_PASSWORD', '')
         }
     }
 
@@ -164,8 +134,8 @@ android {
 
 dependencies {
     testImplementation "junit:junit:4.13.2"
-    testImplementation "org.robolectric:robolectric:4.10"
-    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:1.1.5"
+    testImplementation "org.robolectric:robolectric:4.16.1"
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.5"
 }
 
 task versionName {
@@ -254,7 +224,13 @@ task downloadBootstraps() {
 }
 
 afterEvaluate {
-    tasks.withType(JavaCompile) {
+    // The bootstrap zips are embedded into the APK through incbin during the
+    // native build, so both the C compilation and any Java compile need them
+    // to be present before execution.
+    tasks.named("preBuild") {
+        dependsOn downloadBootstraps
+    }
+    tasks.withType(JavaCompile).configureEach {
         dependsOn downloadBootstraps
     }
 }

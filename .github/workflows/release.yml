@@ -1,0 +1,82 @@
+name: Release Build
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'art/**'
+      - 'site/**'
+      - 'fastlane/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    # Release signing stays limited to the repository owner's own commits.
+    if: github.actor == github.repository_owner
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Verify head commit authorship
+        id: author
+        run: |
+          AUTHOR_EMAIL="$(git log -1 --format='%ae')"
+          if [ "${AUTHOR_EMAIL}" = "212222389+kerneldroid@users.noreply.github.com" ]; then
+            echo "proceed=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "::notice::Head commit authored by '${AUTHOR_EMAIL}' — release build skipped."
+            echo "proceed=false" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Set up JDK 21
+        if: steps.author.outputs.proceed == 'true'
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        if: steps.author.outputs.proceed == 'true'
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Accept Android SDK licenses
+        if: steps.author.outputs.proceed == 'true'
+        run: yes | "${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+
+      - name: Restore release keystore
+        if: steps.author.outputs.proceed == 'true'
+        env:
+          NYAMUX_RELEASE_KEYSTORE_BASE64: ${{ secrets.NYAMUX_RELEASE_KEYSTORE_BASE64 }}
+        run: |
+          KEYSTORE="${RUNNER_TEMP}/nyamux-release.jks"
+          printf '%s' "${NYAMUX_RELEASE_KEYSTORE_BASE64}" | base64 --decode > "${KEYSTORE}"
+          {
+            echo "NYAMUX_RELEASE_STORE_FILE=${KEYSTORE}"
+            echo "NYAMUX_RELEASE_STORE_PASSWORD=${{ secrets.NYAMUX_RELEASE_STORE_PASSWORD }}"
+            echo "NYAMUX_RELEASE_KEY_ALIAS=${{ secrets.NYAMUX_RELEASE_KEY_ALIAS }}"
+            echo "NYAMUX_RELEASE_KEY_PASSWORD=${{ secrets.NYAMUX_RELEASE_KEY_PASSWORD }}"
+          } >> "${GITHUB_ENV}"
+
+      - name: Assemble signed release APK
+        if: steps.author.outputs.proceed == 'true'
+        run: ./gradlew assembleRelease --stacktrace
+
+      - name: Verify release signature
+        if: steps.author.outputs.proceed == 'true'
+        run: |
+          ${JAVA_HOME}/bin/jarsigner -verify app/build/outputs/apk/release/app-release.apk
+          APKSIGNER="$(ls "${ANDROID_HOME}"/build-tools/*/apksigner | sort -V | tail -n1)"
+          "${APKSIGNER}" verify --print-certs app/build/outputs/apk/release/app-release.apk
+
+      - name: Upload signed release APK
+        if: steps.author.outputs.proceed == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: Nyamux-release-${{ github.sha }}
+          path: app/build/outputs/apk/release/app-release.apk
+          retention-days: 90

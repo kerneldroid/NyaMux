@@ -1,0 +1,49 @@
+// Signing configuration for the app module.
+//
+// CI sets credentials through environment variables. Local builds can define
+// the same values either in the environment or in local.properties at the
+// repository root. Nothing here hardcodes machine-specific paths, so the file
+// is safe to commit.
+
+def loadLocalProperties() {
+    def properties = new Properties()
+    def file = rootProject.file('local.properties')
+    if (file.exists()) {
+        file.withInputStream { properties.load(it) }
+    }
+    return properties
+}
+
+def credential = { String envName, String propName ->
+    System.getenv(envName) ?: loadLocalProperties().getProperty(propName) ?: ''
+}
+
+android {
+    signingConfigs {
+        // Pull-request verification builds receive an ephemeral keystore that
+        // CI generates fresh for every run; without those variables developers
+        // fall back to the committed untrusted test key.
+        debug {
+            def storeFileValue = credential('NYAMUX_DEBUG_STORE_FILE', 'NYAMUX_DEBUG_STORE_FILE')
+            if (storeFileValue) {
+                storeFile file(storeFileValue)
+                storePassword credential('NYAMUX_DEBUG_STORE_PASSWORD', 'NYAMUX_DEBUG_STORE_PASSWORD')
+                keyAlias credential('NYAMUX_DEBUG_KEY_ALIAS', 'NYAMUX_DEBUG_KEY_ALIAS')
+                keyPassword credential('NYAMUX_DEBUG_KEY_PASSWORD', 'NYAMUX_DEBUG_KEY_PASSWORD')
+            } else {
+                storeFile file('testkey_untrusted.jks')
+                keyAlias 'alias'
+                storePassword 'android'
+                keyPassword 'android'
+            }
+        }
+
+        release {
+            def storeFileValue = credential('NYAMUX_RELEASE_STORE_FILE', 'NYAMUX_RELEASE_STORE_FILE')
+            storeFile storeFileValue ? file(storeFileValue) : file('../release.jks')
+            storePassword credential('NYAMUX_RELEASE_STORE_PASSWORD', 'NYAMUX_RELEASE_STORE_PASSWORD')
+            keyAlias credential('NYAMUX_RELEASE_KEY_ALIAS', 'NYAMUX_RELEASE_KEY_ALIAS') ?: 'nyamux'
+            keyPassword credential('NYAMUX_RELEASE_KEY_PASSWORD', 'NYAMUX_RELEASE_KEY_PASSWORD')
+        }
+    }
+}
