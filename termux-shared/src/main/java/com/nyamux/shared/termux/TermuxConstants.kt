@@ -39,11 +39,7 @@ import java.util.Formatter
  * - 0.4.0 (2021-03-16)
  *      - Added `BROADCAST_TERMUX_OPENED`,
  *          `TERMUX_API_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION`
- *          `TERMUX_BOOT_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION`,
- *          `TERMUX_FLOAT_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION`,
- *          `TERMUX_STYLING_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION`,
  *          `TERMUX_TASKER_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION`,
- *          `TERMUX_WIDGET_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION`.
  *
  * - 0.5.0 (2021-03-16)
  *      - Renamed "Termux Plugin app" labels to "Termux:Tasker app".
@@ -95,19 +91,12 @@ import java.util.Formatter
  *          `TERMUX_GITHUB_ORGANIZATION_NAME`, `TERMUX_GITHUB_ORGANIZATION_URL`,
  *          `TERMUX_GITHUB_REPO_NAME`, `TERMUX_GITHUB_REPO_URL`, `TERMUX_FDROID_PACKAGE_URL`,
  *          `TERMUX_API_GITHUB_REPO_NAME`,`TERMUX_API_GITHUB_REPO_URL`, `TERMUX_API_FDROID_PACKAGE_URL`,
- *          `TERMUX_BOOT_GITHUB_REPO_NAME`, `TERMUX_BOOT_GITHUB_REPO_URL`, `TERMUX_BOOT_FDROID_PACKAGE_URL`,
- *          `TERMUX_FLOAT_GITHUB_REPO_NAME`, `TERMUX_FLOAT_GITHUB_REPO_URL`, `TERMUX_FLOAT_FDROID_PACKAGE_URL`,
- *          `TERMUX_STYLING_GITHUB_REPO_NAME`, `TERMUX_STYLING_GITHUB_REPO_URL`, `TERMUX_STYLING_FDROID_PACKAGE_URL`,
  *          `TERMUX_TASKER_GITHUB_REPO_NAME`, `TERMUX_TASKER_GITHUB_REPO_URL`, `TERMUX_TASKER_FDROID_PACKAGE_URL`,
- *          `TERMUX_WIDGET_GITHUB_REPO_NAME`, `TERMUX_WIDGET_GITHUB_REPO_URL` `TERMUX_WIDGET_FDROID_PACKAGE_URL`.
  *
  * - 0.15.0 (2021-04-06)
  *      - Fixed some variables that had `PREFIX_` substring missing in their name.
  *      - Added `TERMUX_CRASH_LOG_FILE_PATH`, `TERMUX_CRASH_LOG_BACKUP_FILE_PATH`,
  *          `TERMUX_GITHUB_ISSUES_REPO_URL`, `TERMUX_API_GITHUB_ISSUES_REPO_URL`,
- *          `TERMUX_BOOT_GITHUB_ISSUES_REPO_URL`, `TERMUX_FLOAT_GITHUB_ISSUES_REPO_URL`,
- *          `TERMUX_STYLING_GITHUB_ISSUES_REPO_URL`, `TERMUX_TASKER_GITHUB_ISSUES_REPO_URL`,
- *          `TERMUX_WIDGET_GITHUB_ISSUES_REPO_URL`,
  *          `TERMUX_GITHUB_WIKI_REPO_URL`, `TERMUX_PACKAGES_GITHUB_WIKI_REPO_URL`,
  *          `TERMUX_PACKAGES_GITHUB_REPO_NAME`, `TERMUX_PACKAGES_GITHUB_REPO_URL`, `TERMUX_PACKAGES_GITHUB_ISSUES_REPO_URL`,
  *          `TERMUX_GAME_PACKAGES_GITHUB_REPO_NAME`, `TERMUX_GAME_PACKAGES_GITHUB_REPO_URL`, `TERMUX_GAME_PACKAGES_GITHUB_ISSUES_REPO_URL`,
@@ -180,20 +169,14 @@ import java.util.Formatter
  *      - Changed `TERMUX_ACTIVITY.ACTION_FAILSAFE_SESSION` to `TERMUX_ACTIVITY.EXTRA_FAILSAFE_SESSION`.
  *
  * - 0.27.0 (2021-09-02)
- *      - Added `TERMUX_FLOAT_APP_NOTIFICATION_CHANNEL_ID`, `TERMUX_FLOAT_APP_NOTIFICATION_CHANNEL_NAME`,
- *          `TERMUX_FLOAT_APP.TERMUX_FLOAT_SERVICE_NAME`.
- *      - Added following to `TERMUX_FLOAT_APP.TERMUX_FLOAT_SERVICE`:
  *          `ACTION_STOP_SERVICE`, `ACTION_SHOW`, `ACTION_HIDE`.
  *
  * - 0.28.0 (2021-09-02)
- *      - Added `TERMUX_FLOAT_PROPERTIES_PRIMARY_FILE*` and `TERMUX_FLOAT_PROPERTIES_SECONDARY_FILE*`.
  *
  * - 0.29.0 (2021-09-04)
  *      - Added `TERMUX_SHORTCUT_TASKS_SCRIPTS_DIR_BASENAME`, `TERMUX_SHORTCUT_SCRIPT_ICONS_DIR_BASENAME`,
  *          `TERMUX_SHORTCUT_SCRIPT_ICONS_DIR_PATH`, `TERMUX_SHORTCUT_SCRIPT_ICONS_DIR`.
- *      - Added following to `TERMUX_WIDGET.TERMUX_WIDGET_PROVIDER`:
  *          `ACTION_WIDGET_ITEM_CLICKED`, `ACTION_REFRESH_WIDGET`, `EXTRA_FILE_CLICKED`.
- *      - Changed naming convention of `TERMUX_FLOAT_APP.TERMUX_FLOAT_SERVICE.ACTION_*`.
  *      - Fixed wrong path set for `TERMUX_SHORTCUT_SCRIPTS_DIR_PATH`.
  *
  * - 0.30.0 (2021-09-08)
@@ -207,10 +190,8 @@ import java.util.Formatter
  *
  * - 0.32.0 (2021-09-23)
  *      - Added `TERMUX_API.TERMUX_API_ACTIVITY_NAME`, `TERMUX_TASKER.TERMUX_TASKER_ACTIVITY_NAME`
- *          and `TERMUX_WIDGET.TERMUX_WIDGET_ACTIVITY_NAME`.
  *
  * - 0.33.0 (2021-10-08)
- *      - Added `TERMUX_PROPERTIES_FILE_PATHS_LIST` and `TERMUX_FLOAT_PROPERTIES_FILE_PATHS_LIST`.
  *
  * - 0.34.0 (2021-10-26)
  *      - Move `RESULT_SENDER` to `com.nyamux.shared.shell.command.ShellCommandConstants`.
@@ -276,7 +257,6 @@ import java.util.Formatter
  *      - Added `TERMUX_PREFIX_DIR_IGNORED_SUB_FILES_PATHS_TO_CONSIDER_AS_EMPTY`.
  *
  * - 0.53.0 (2025-01-12)
- *      - Renamed `TERMUX_API`, `TERMUX_STYLING`, `TERMUX_TASKER`, `TERMUX_WIDGET` classes with `_APP` suffix added.
  *      - Added `TERMUX_*_MAIN_ACTIVITY_NAME` and `TERMUX_*_LAUNCHER_ACTIVITY_NAME` constants to each app class.
  */
 
@@ -363,45 +343,6 @@ object TermuxConstants {
     /** Termux:API F-Droid package url */
     const val TERMUX_API_FDROID_PACKAGE_URL = "$FDROID_PACKAGES_BASE_URL/$TERMUX_API_PACKAGE_NAME" // Default: "https://f-droid.org/en/packages/com.nyamux.api"
 
-    /** Termux:Boot app name */
-    const val TERMUX_BOOT_APP_NAME = "Nyamux:Boot" // Default: "Termux:Boot"
-    /** Termux:Boot app package name */
-    const val TERMUX_BOOT_PACKAGE_NAME = "$TERMUX_PACKAGE_NAME.boot" // Default: "com.nyamux.boot"
-    /** Termux:Boot GitHub repo name */
-    const val TERMUX_BOOT_GITHUB_REPO_NAME = "termux-boot" // Default: "termux-boot"
-    /** Termux:Boot GitHub repo url */
-    const val TERMUX_BOOT_GITHUB_REPO_URL = "$TERMUX_GITHUB_ORGANIZATION_URL/$TERMUX_BOOT_GITHUB_REPO_NAME" // Default: "https://github.com/termux/termux-boot"
-    /** Termux:Boot GitHub issues repo url */
-    const val TERMUX_BOOT_GITHUB_ISSUES_REPO_URL = "$TERMUX_BOOT_GITHUB_REPO_URL/issues" // Default: "https://github.com/termux/termux-boot/issues"
-    /** Termux:Boot F-Droid package url */
-    const val TERMUX_BOOT_FDROID_PACKAGE_URL = "$FDROID_PACKAGES_BASE_URL/$TERMUX_BOOT_PACKAGE_NAME" // Default: "https://f-droid.org/en/packages/com.nyamux.boot"
-
-    /** Termux:Float app name */
-    const val TERMUX_FLOAT_APP_NAME = "Nyamux:Float" // Default: "Termux:Float"
-    /** Termux:Float app package name */
-    const val TERMUX_FLOAT_PACKAGE_NAME = "$TERMUX_PACKAGE_NAME.window" // Default: "com.nyamux.window"
-    /** Termux:Float GitHub repo name */
-    const val TERMUX_FLOAT_GITHUB_REPO_NAME = "termux-float" // Default: "termux-float"
-    /** Termux:Float GitHub repo url */
-    const val TERMUX_FLOAT_GITHUB_REPO_URL = "$TERMUX_GITHUB_ORGANIZATION_URL/$TERMUX_FLOAT_GITHUB_REPO_NAME" // Default: "https://github.com/termux/termux-float"
-    /** Termux:Float GitHub issues repo url */
-    const val TERMUX_FLOAT_GITHUB_ISSUES_REPO_URL = "$TERMUX_FLOAT_GITHUB_REPO_URL/issues" // Default: "https://github.com/termux/termux-float/issues"
-    /** Termux:Float F-Droid package url */
-    const val TERMUX_FLOAT_FDROID_PACKAGE_URL = "$FDROID_PACKAGES_BASE_URL/$TERMUX_FLOAT_PACKAGE_NAME" // Default: "https://f-droid.org/en/packages/com.nyamux.window"
-
-    /** Termux:Styling app name */
-    const val TERMUX_STYLING_APP_NAME = "Nyamux:Styling" // Default: "Termux:Styling"
-    /** Termux:Styling app package name */
-    const val TERMUX_STYLING_PACKAGE_NAME = "$TERMUX_PACKAGE_NAME.styling" // Default: "com.nyamux.styling"
-    /** Termux:Styling GitHub repo name */
-    const val TERMUX_STYLING_GITHUB_REPO_NAME = "termux-styling" // Default: "termux-styling"
-    /** Termux:Styling GitHub repo url */
-    const val TERMUX_STYLING_GITHUB_REPO_URL = "$TERMUX_GITHUB_ORGANIZATION_URL/$TERMUX_STYLING_GITHUB_REPO_NAME" // Default: "https://github.com/termux/termux-styling"
-    /** Termux:Styling GitHub issues repo url */
-    const val TERMUX_STYLING_GITHUB_ISSUES_REPO_URL = "$TERMUX_STYLING_GITHUB_REPO_URL/issues" // Default: "https://github.com/termux/termux-styling/issues"
-    /** Termux:Styling F-Droid package url */
-    const val TERMUX_STYLING_FDROID_PACKAGE_URL = "$FDROID_PACKAGES_BASE_URL/$TERMUX_STYLING_PACKAGE_NAME" // Default: "https://f-droid.org/en/packages/com.nyamux.styling"
-
     /** Termux:Tasker app name */
     const val TERMUX_TASKER_APP_NAME = "Nyamux:Tasker" // Default: "Termux:Tasker"
     /** Termux:Tasker app package name */
@@ -415,19 +356,6 @@ object TermuxConstants {
     /** Termux:Tasker F-Droid package url */
     const val TERMUX_TASKER_FDROID_PACKAGE_URL = "$FDROID_PACKAGES_BASE_URL/$TERMUX_TASKER_PACKAGE_NAME" // Default: "https://f-droid.org/en/packages/com.nyamux.tasker"
 
-    /** Termux:Widget app name */
-    const val TERMUX_WIDGET_APP_NAME = "Nyamux:Widget" // Default: "Termux:Widget"
-    /** Termux:Widget app package name */
-    const val TERMUX_WIDGET_PACKAGE_NAME = "$TERMUX_PACKAGE_NAME.widget" // Default: "com.nyamux.widget"
-    /** Termux:Widget GitHub repo name */
-    const val TERMUX_WIDGET_GITHUB_REPO_NAME = "termux-widget" // Default: "termux-widget"
-    /** Termux:Widget GitHub repo url */
-    const val TERMUX_WIDGET_GITHUB_REPO_URL = "$TERMUX_GITHUB_ORGANIZATION_URL/$TERMUX_WIDGET_GITHUB_REPO_NAME" // Default: "https://github.com/termux/termux-widget"
-    /** Termux:Widget GitHub issues repo url */
-    const val TERMUX_WIDGET_GITHUB_ISSUES_REPO_URL = "$TERMUX_WIDGET_GITHUB_REPO_URL/issues" // Default: "https://github.com/termux/termux-widget/issues"
-    /** Termux:Widget F-Droid package url */
-    const val TERMUX_WIDGET_FDROID_PACKAGE_URL = "$FDROID_PACKAGES_BASE_URL/$TERMUX_WIDGET_PACKAGE_NAME" // Default: "https://f-droid.org/en/packages/com.nyamux.widget"
-
     /*
      * Termux plugin apps lists.
      */
@@ -435,21 +363,13 @@ object TermuxConstants {
     @JvmField
     val TERMUX_PLUGIN_APP_NAMES_LIST: List<String> = Arrays.asList(
         TERMUX_API_APP_NAME,
-        TERMUX_BOOT_APP_NAME,
-        TERMUX_FLOAT_APP_NAME,
-        TERMUX_STYLING_APP_NAME,
-        TERMUX_TASKER_APP_NAME,
-        TERMUX_WIDGET_APP_NAME
+        TERMUX_TASKER_APP_NAME
     )
 
     @JvmField
     val TERMUX_PLUGIN_APP_PACKAGE_NAMES_LIST: List<String> = Arrays.asList(
         TERMUX_API_PACKAGE_NAME,
-        TERMUX_BOOT_PACKAGE_NAME,
-        TERMUX_FLOAT_PACKAGE_NAME,
-        TERMUX_STYLING_PACKAGE_NAME,
-        TERMUX_TASKER_PACKAGE_NAME,
-        TERMUX_WIDGET_PACKAGE_NAME
+        TERMUX_TASKER_PACKAGE_NAME
     )
 
     /*
@@ -666,20 +586,12 @@ object TermuxConstants {
     /** Termux:API app default SharedPreferences file basename without extension */
     const val TERMUX_API_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION = "${TERMUX_API_PACKAGE_NAME}_preferences" // Default: "com.nyamux.api_preferences"
 
-    /** Termux:Boot app default SharedPreferences file basename without extension */
-    const val TERMUX_BOOT_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION = "${TERMUX_BOOT_PACKAGE_NAME}_preferences" // Default: "com.nyamux.boot_preferences"
 
-    /** Termux:Float app default SharedPreferences file basename without extension */
-    const val TERMUX_FLOAT_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION = "${TERMUX_FLOAT_PACKAGE_NAME}_preferences" // Default: "com.nyamux.window_preferences"
 
-    /** Termux:Styling app default SharedPreferences file basename without extension */
-    const val TERMUX_STYLING_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION = "${TERMUX_STYLING_PACKAGE_NAME}_preferences" // Default: "com.nyamux.styling_preferences"
 
     /** Termux:Tasker app default SharedPreferences file basename without extension */
     const val TERMUX_TASKER_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION = "${TERMUX_TASKER_PACKAGE_NAME}_preferences" // Default: "com.nyamux.tasker_preferences"
 
-    /** Termux:Widget app default SharedPreferences file basename without extension */
-    const val TERMUX_WIDGET_DEFAULT_PREFERENCES_FILE_BASENAME_WITHOUT_EXTENSION = "${TERMUX_WIDGET_PACKAGE_NAME}_preferences" // Default: "com.nyamux.widget_preferences"
 
     /** Termux app properties primary file path */
     const val TERMUX_PROPERTIES_PRIMARY_FILE_PATH = "$TERMUX_DATA_HOME_DIR_PATH/termux.properties" // Default: "/data/data/com.nyamux/files/home/.termux/termux.properties"
@@ -703,37 +615,17 @@ object TermuxConstants {
         TERMUX_PROPERTIES_SECONDARY_FILE_PATH
     )
 
-    /** Termux:Float app properties primary file path */
-    const val TERMUX_FLOAT_PROPERTIES_PRIMARY_FILE_PATH = "$TERMUX_DATA_HOME_DIR_PATH/termux.float.properties" // Default: "/data/data/com.nyamux/files/home/.termux/termux.float.properties"
-    /** Termux:Float app properties primary file */
-    @JvmField
-    val TERMUX_FLOAT_PROPERTIES_PRIMARY_FILE = File(TERMUX_FLOAT_PROPERTIES_PRIMARY_FILE_PATH)
 
-    /** Termux:Float app properties secondary file path */
-    const val TERMUX_FLOAT_PROPERTIES_SECONDARY_FILE_PATH = "$TERMUX_CONFIG_HOME_DIR_PATH/termux.float.properties" // Default: "/data/data/com.nyamux/files/home/.config/termux/termux.float.properties"
-    /** Termux:Float app properties secondary file */
-    @JvmField
-    val TERMUX_FLOAT_PROPERTIES_SECONDARY_FILE = File(TERMUX_FLOAT_PROPERTIES_SECONDARY_FILE_PATH)
 
-    /** Termux:Float app properties file paths list. **DO NOT** allow these files to be modified by
-     * {@link android.content.ContentProvider} exposed to external apps, since they may silently
-     * modify the values for security properties like {@link #PROP_ALLOW_EXTERNAL_APPS} set by users
-     * without their explicit consent. */
-    @JvmField
-    val TERMUX_FLOAT_PROPERTIES_FILE_PATHS_LIST: List<String> = Arrays.asList(
-        TERMUX_FLOAT_PROPERTIES_PRIMARY_FILE_PATH,
-        TERMUX_FLOAT_PROPERTIES_SECONDARY_FILE_PATH
-    )
-
-    /** Termux app and Termux:Styling colors.properties file path */
+    /** Termux app colors.properties file path */
     const val TERMUX_COLOR_PROPERTIES_FILE_PATH = "$TERMUX_DATA_HOME_DIR_PATH/colors.properties" // Default: "/data/data/com.nyamux/files/home/.termux/colors.properties"
-    /** Termux app and Termux:Styling colors.properties file */
+    /** Termux app colors.properties file */
     @JvmField
     val TERMUX_COLOR_PROPERTIES_FILE = File(TERMUX_COLOR_PROPERTIES_FILE_PATH)
 
-    /** Termux app and Termux:Styling font.ttf file path */
+    /** Termux app font.ttf file path */
     const val TERMUX_FONT_FILE_PATH = "$TERMUX_DATA_HOME_DIR_PATH/font.ttf" // Default: "/data/data/com.nyamux/files/home/.termux/font.ttf"
-    /** Termux app and Termux:Styling font.ttf file */
+    /** Termux app font.ttf file */
     @JvmField
     val TERMUX_FONT_FILE = File(TERMUX_FONT_FILE_PATH)
 
@@ -750,40 +642,35 @@ object TermuxConstants {
     const val TERMUX_ENV_TEMP_FILE_PATH = "$TERMUX_CONFIG_PREFIX_DIR_PATH/termux.env.tmp" // Default: "/data/data/com.nyamux/files/usr/etc/termux/termux.env.tmp"
 
     /*
-     * Termux app plugin specific paths.
+     * Termux app script directories.
      */
 
-    /** Termux app directory path to store scripts to be run at boot by Termux:Boot */
-    const val TERMUX_BOOT_SCRIPTS_DIR_PATH = "$TERMUX_DATA_HOME_DIR_PATH/boot" // Default: "/data/data/com.nyamux/files/home/.termux/boot"
-    /** Termux app directory to store scripts to be run at boot by Termux:Boot */
-    @JvmField
-    val TERMUX_BOOT_SCRIPTS_DIR = File(TERMUX_BOOT_SCRIPTS_DIR_PATH)
 
     /** Termux app directory path to store foreground scripts that can be run by the termux launcher
-     * widget provided by Termux:Widget */
+     * launcher widgets */
     const val TERMUX_SHORTCUT_SCRIPTS_DIR_PATH = "$TERMUX_HOME_DIR_PATH/.shortcuts" // Default: "/data/data/com.nyamux/files/home/.shortcuts"
-    /** Termux app directory to store foreground scripts that can be run by the termux launcher widget provided by Termux:Widget */
+    /** Termux app directory to store foreground scripts that can be run by the termux launcher widget provided by launcher widgets */
     @JvmField
     val TERMUX_SHORTCUT_SCRIPTS_DIR = File(TERMUX_SHORTCUT_SCRIPTS_DIR_PATH)
 
     /** Termux app directory basename that stores background scripts that can be run by the termux
-     * launcher widget provided by Termux:Widget */
+     * launcher launcher widgets */
     const val TERMUX_SHORTCUT_TASKS_SCRIPTS_DIR_BASENAME = "tasks" // Default: "tasks"
     /** Termux app directory path to store background scripts that can be run by the termux launcher
-     * widget provided by Termux:Widget */
+     * launcher widgets */
     const val TERMUX_SHORTCUT_TASKS_SCRIPTS_DIR_PATH = "$TERMUX_SHORTCUT_SCRIPTS_DIR_PATH/$TERMUX_SHORTCUT_TASKS_SCRIPTS_DIR_BASENAME" // Default: "/data/data/com.nyamux/files/home/.shortcuts/tasks"
-    /** Termux app directory to store background scripts that can be run by the termux launcher widget provided by Termux:Widget */
+    /** Termux app directory to store background scripts that can be run by the termux launcher widget provided by launcher widgets */
     @JvmField
     val TERMUX_SHORTCUT_TASKS_SCRIPTS_DIR = File(TERMUX_SHORTCUT_TASKS_SCRIPTS_DIR_PATH)
 
     /** Termux app directory basename that stores icons for the foreground and background scripts
-     * that can be run by the termux launcher widget provided by Termux:Widget */
+     * that can be run by the termux launcher launcher widgets */
     const val TERMUX_SHORTCUT_SCRIPT_ICONS_DIR_BASENAME = "icons" // Default: "icons"
     /** Termux app directory path to store icons for the foreground and background scripts that can
-     * be run by the termux launcher widget provided by Termux:Widget */
+     * be run by the termux launcher launcher widgets */
     const val TERMUX_SHORTCUT_SCRIPT_ICONS_DIR_PATH = "$TERMUX_SHORTCUT_SCRIPTS_DIR_PATH/$TERMUX_SHORTCUT_SCRIPT_ICONS_DIR_BASENAME" // Default: "/data/data/com.nyamux/files/home/.shortcuts/icons"
     /** Termux app directory to store icons for the foreground and background scripts that can be
-     * run by the termux launcher widget provided by Termux:Widget */
+     * run by the termux launcher launcher widgets */
     @JvmField
     val TERMUX_SHORTCUT_SCRIPT_ICONS_DIR = File(TERMUX_SHORTCUT_SCRIPT_ICONS_DIR_PATH)
 
@@ -821,13 +708,6 @@ object TermuxConstants {
     const val TERMUX_CRASH_REPORTS_NOTIFICATION_CHANNEL_ID = "termux_crash_reports_notification_channel"
     /** Termux app notification channel name used for crash reports */
     const val TERMUX_CRASH_REPORTS_NOTIFICATION_CHANNEL_NAME = "$TERMUX_APP_NAME Crash Reports"
-
-    /** Termux app notification channel id used by {@link TERMUX_FLOAT_APP.TERMUX_FLOAT_SERVICE} */
-    const val TERMUX_FLOAT_APP_NOTIFICATION_CHANNEL_ID = "termux_float_notification_channel"
-    /** Termux app notification channel name used by {@link TERMUX_FLOAT_APP.TERMUX_FLOAT_SERVICE} */
-    const val TERMUX_FLOAT_APP_NOTIFICATION_CHANNEL_NAME = "$TERMUX_FLOAT_APP_NAME App"
-    /** Termux app unique notification id used by {@link TERMUX_APP.TERMUX_SERVICE} */
-    const val TERMUX_FLOAT_APP_NOTIFICATION_ID = 1339
 
     /*
      * Termux app and plugins miscellaneous variables.
@@ -1131,63 +1011,6 @@ object TermuxConstants {
         }
     }
 
-    /**
-     * Termux:Boot app constants.
-     */
-    class TERMUX_BOOT_APP {
-        companion object {
-            /** Termux:Boot app main activity name. */
-            const val TERMUX_BOOT_MAIN_ACTIVITY_NAME = "$TERMUX_BOOT_PACKAGE_NAME.activities.TermuxBootMainActivity" // Default: "com.nyamux.boot.activities.TermuxBootMainActivity"
-
-            /** Termux:Boot app launcher activity name. This is an `activity-alias` for {@link #TERMUX_BOOT_MAIN_ACTIVITY_NAME} used for launchers with {@link Intent#CATEGORY_LAUNCHER}. */
-            const val TERMUX_BOOT_LAUNCHER_ACTIVITY_NAME = "$TERMUX_BOOT_PACKAGE_NAME.activities.TermuxBootLauncherActivity" // Default: "com.nyamux.boot.activities.TermuxBootLauncherActivity"
-        }
-    }
-
-    /**
-     * Termux:Float app constants.
-     */
-    class TERMUX_FLOAT_APP {
-        companion object {
-            /** Termux:Float app core activity name. */
-            const val TERMUX_FLOAT_ACTIVITY_NAME = "$TERMUX_FLOAT_PACKAGE_NAME.TermuxFloatActivity" // Default: "com.nyamux.window.TermuxFloatActivity"
-
-            /** Termux:Float app core service name. */
-            const val TERMUX_FLOAT_SERVICE_NAME = "$TERMUX_FLOAT_PACKAGE_NAME.TermuxFloatService" // Default: "com.nyamux.window.TermuxFloatService"
-        }
-
-        /**
-         * Termux:Float app core service.
-         */
-        class TERMUX_FLOAT_SERVICE {
-            companion object {
-                /** Intent action to stop TERMUX_FLOAT_SERVICE. */
-                const val ACTION_STOP_SERVICE = "$TERMUX_FLOAT_PACKAGE_NAME.ACTION_STOP_SERVICE" // Default: "com.nyamux.float.ACTION_STOP_SERVICE"
-
-                /** Intent action to show float window. */
-                const val ACTION_SHOW = "$TERMUX_FLOAT_PACKAGE_NAME.ACTION_SHOW" // Default: "com.nyamux.float.ACTION_SHOW"
-
-                /** Intent action to hide float window. */
-                const val ACTION_HIDE = "$TERMUX_FLOAT_PACKAGE_NAME.ACTION_HIDE" // Default: "com.nyamux.float.ACTION_HIDE"
-            }
-        }
-    }
-
-    /**
-     * Termux:Styling app constants.
-     */
-    class TERMUX_STYLING_APP {
-        companion object {
-            /** Termux:Styling app core activity name. */
-            const val TERMUX_STYLING_ACTIVITY_NAME = "$TERMUX_STYLING_PACKAGE_NAME.TermuxStyleActivity" // Default: "com.nyamux.styling.TermuxStyleActivity"
-
-            /** Termux:Styling app main activity name. */
-            const val TERMUX_STYLING_MAIN_ACTIVITY_NAME = "$TERMUX_STYLING_PACKAGE_NAME.activities.TermuxStylingMainActivity" // Default: "com.nyamux.styling.activities.TermuxStylingMainActivity"
-
-            /** Termux:Styling app launcher activity name. This is an `activity-alias` for {@link #TERMUX_STYLING_MAIN_ACTIVITY_NAME} used for launchers with {@link Intent#CATEGORY_LAUNCHER}. */
-            const val TERMUX_STYLING_LAUNCHER_ACTIVITY_NAME = "$TERMUX_STYLING_PACKAGE_NAME.activities.TermuxStylingLauncherActivity" // Default: "com.nyamux.styling.activities.TermuxStylingLauncherActivity"
-        }
-    }
 
     /**
      * Termux:Tasker app constants.
@@ -1202,35 +1025,4 @@ object TermuxConstants {
         }
     }
 
-    /**
-     * Termux:Widget app constants.
-     */
-    class TERMUX_WIDGET_APP {
-        companion object {
-            /** Termux:Widget app main activity name. */
-            const val TERMUX_WIDGET_MAIN_ACTIVITY_NAME = "$TERMUX_WIDGET_PACKAGE_NAME.activities.TermuxWidgetMainActivity" // Default: "com.nyamux.widget.activities.TermuxWidgetMainActivity"
-
-            /** Termux:Widget app launcher activity name. This is an `activity-alias` for {@link #TERMUX_WIDGET_MAIN_ACTIVITY_NAME} used for launchers with {@link Intent#CATEGORY_LAUNCHER}. */
-            const val TERMUX_WIDGET_LAUNCHER_ACTIVITY_NAME = "$TERMUX_WIDGET_PACKAGE_NAME.activities.TermuxWidgetLauncherActivity" // Default: "com.nyamux.widget.activities.TermuxWidgetLauncherActivity"
-
-            /**  Intent {@code String} extra for the token of the Termux:Widget app shortcuts. */
-            const val EXTRA_TOKEN_NAME = "$TERMUX_PACKAGE_NAME.shortcut.token" // Default: "com.nyamux.shortcut.token"
-        }
-
-        /**
-         * Termux:Widget app {@link android.appwidget.AppWidgetProvider} class.
-         */
-        class TERMUX_WIDGET_PROVIDER {
-            companion object {
-                /** Intent action for if an item is clicked in the widget. */
-                const val ACTION_WIDGET_ITEM_CLICKED = "$TERMUX_WIDGET_PACKAGE_NAME.ACTION_WIDGET_ITEM_CLICKED" // Default: "com.nyamux.widget.ACTION_WIDGET_ITEM_CLICKED"
-
-                /** Intent action to refresh files in the widget. */
-                const val ACTION_REFRESH_WIDGET = "$TERMUX_WIDGET_PACKAGE_NAME.ACTION_REFRESH_WIDGET" // Default: "com.nyamux.widget.ACTION_REFRESH_WIDGET"
-
-                /**  Intent {@code String} extra for the file clicked for the TERMUX_WIDGET_PROVIDER.ACTION_WIDGET_ITEM_CLICKED intent. */
-                const val EXTRA_FILE_CLICKED = "$TERMUX_WIDGET_PACKAGE_NAME.EXTRA_FILE_CLICKED" // Default: "com.nyamux.widget.EXTRA_FILE_CLICKED"
-            }
-        }
-    }
 }

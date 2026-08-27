@@ -203,81 +203,6 @@ object TermuxPreferenceConstants {
 
     }
 
-
-
-    /**
-     * Termux:Boot app constants.
-     */
-    object TERMUX_BOOT_APP {
-
-        /**
-         * Defines the key for current log level.
-         */
-        const val KEY_LOG_LEVEL = "log_level"
-
-    }
-
-
-
-    /**
-     * Termux:Float app constants.
-     */
-    object TERMUX_FLOAT_APP {
-
-        /**
-         * The float window x coordinate.
-         */
-        const val KEY_WINDOW_X = "window_x"
-
-        /**
-         * The float window y coordinate.
-         */
-        const val KEY_WINDOW_Y = "window_y"
-
-        /**
-         * The float window width.
-         */
-        const val KEY_WINDOW_WIDTH = "window_width"
-
-        /**
-         * The float window height.
-         */
-        const val KEY_WINDOW_HEIGHT = "window_height"
-
-        /**
-         * Defines the key for font size of termux terminal view.
-         */
-        const val KEY_FONTSIZE = "fontsize"
-
-        /**
-         * Defines the key for current log level.
-         */
-        const val KEY_LOG_LEVEL = "log_level"
-
-        /**
-         * Defines the key for whether termux terminal view key logging is enabled or not
-         */
-        const val KEY_TERMINAL_VIEW_KEY_LOGGING_ENABLED = "terminal_view_key_logging_enabled"
-        const val DEFAULT_VALUE_TERMINAL_VIEW_KEY_LOGGING_ENABLED = false
-
-    }
-
-
-
-    /**
-     * Termux:Styling app constants.
-     */
-    object TERMUX_STYLING_APP {
-
-        /**
-         * Defines the key for current log level.
-         */
-        const val KEY_LOG_LEVEL = "log_level"
-
-    }
-
-
-
     /**
      * Termux:Tasker app constants.
      */
@@ -294,25 +219,6 @@ object TermuxPreferenceConstants {
          */
         const val KEY_LAST_PENDING_INTENT_REQUEST_CODE = "last_pending_intent_request_code"
         const val DEFAULT_VALUE_KEY_LAST_PENDING_INTENT_REQUEST_CODE = 0
-
-    }
-
-
-
-    /**
-     * Termux:Widget app constants.
-     */
-    object TERMUX_WIDGET_APP {
-
-        /**
-         * Defines the key for current log level.
-         */
-        const val KEY_LOG_LEVEL = "log_level"
-
-        /**
-         * Defines the key for current token for shortcuts.
-         */
-        const val KEY_TOKEN = "token"
 
     }
 

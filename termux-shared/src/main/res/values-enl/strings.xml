@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE resources [
+    <!ENTITY TERMUX_PACKAGE_NAME "com.nyamux">
+    <!ENTITY TERMUX_APP_NAME "Nyamux">
+    <!ENTITY TERMUX_API_APP_NAME "Nyamux:API">
+    <!ENTITY TERMUX_TASKER_APP_NAME "Nyamux:Tasker">
+    <!ENTITY TERMUX_PREFIX_DIR_PATH "/data/data/com.nyamux/files/usr">
+    ]>
+
+<resources>
+
+    <string name="msg_directory_absolute_path">%1$s Diwectowy Absowute Path: \"%2$s\" (・_・;)</string>
+
+
+
+    <!-- PackageUtils -->
+    <string name="error_app_not_installed_or_disabled_warning">Da %1$s (%2$s) app is not instyawwed ow disyabwed nya… (っ˘̩╭╮˘̩)っ</string>
+    <string name="error_get_package_context_failed_title">Faiwed To Get Package Context (╯°□°)╯</string>
+    <string name="error_get_package_context_failed_message">Faiwed to get package context fow da \"%1$s\" package.
+        Dis may be because da app package is not instyawwed ow it has diffewent APK signatuwe fwom da cuwwent app. (╥﹏╥)</string>
+    <string name="error_get_package_context_failed_help_url_message">Check %1$s fow mowe detaiws pwease (•ᴗ•)</string>
+    <string name="error_get_component_state_failed">Faiwed to get %1$s/%2$s component state (・_・;)</string>
+    <string name="error_enable_component_failed">Faiwed to enyabwe %1$s/%2$s component (╥﹏╥)</string>
+    <string name="error_disable_component_failed">Faiwed to enyabwe %1$s/%2$s component nya… (・_・;)</string>
+
+
+
+    <!-- PermissionUtils -->
+    <string name="message_sudo_please_grant_permissions">Pwease gwant wequested pewmission(s) (っ˘̩╭╮˘̩)っ</string>
+    <string name="error_failed_to_request_permissions">Faiwed to wequest pewmissions with wequest code %1$d: %2$s (╯°□°)╯</string>
+    <string name="error_attempted_to_check_for_permissions_not_requested">Twied to check fow pewmissions dat have not been wequested in app manifest: %1$s uwu?</string>
+    <string name="error_attempted_to_ask_for_permissions_not_requested">Twied to ask fow pewmissions dat have not been wequested in app manifest: %1$s owo</string>
+    <string name="error_has_not_requested_legacy_external_storage">Da \"%1$s\" package is tawgeting tawgetSdkVersion %2$d and is wunning on andwoid sdk %3$d but has not set wequestLegacyExtewnawStowage to twue in app manifest nya (・_・;)</string>
+    <string name="msg_requires_dump_and_package_usage_stats_permissions">Wequiwes `DUMP` and `PACKAGE_USAGE_STATS` pewmission x3</string>
+    <string name="error_display_over_other_apps_permission_not_granted">%1$s needs
+        da \"Dispway uvew uvthew apps\" pewmission to stawt activities and sewvices fwom backgwound on Andwoid >= 10.
+        Gwants it fwom Andwoid Settiwngs -> Apps -> %1$s -> Advanced -> Dwaw uvew uvthew apps.
+        Da pewmission nyame may be diffewent on diffewent devices, wike on Xiaomi, its cawwed
+        \"Dispway pop-up windows whiwe wunning in da backgwound\", check https://dontkillmyapp.com
+        fow device specific issues pwease (っ˘̩╭╮˘̩)っ</string>
+
+
+
+    <!-- TermuxPluginUtils -->
+    <string name="error_allow_external_apps_ungranted">%1$s wequiwes `awwow-externyaw-apps`
+        pwopewty to be set to `twue` in `%2$s` fiwe nya (・_・;)</string>
+
+
+
+    <!-- ReportActivity -->
+    <string name="title_report_text">Wepowt Text (•ᴗ•)</string>
+    <string name="msg_report_truncated">**Wepowt Twuncated**\n\nWepowt is too wawge to view hewe.
+        Use `Save To Fiwe` option fwom options menu (3-dots on top wight) and view it in an extewnew text editow app. (╥﹏╥)\n\n##\n\n</string>
+
+
+
+    <!-- ShareUtils -->
+    <string name="title_share_with">Shawe With owo</string>
+    <string name="title_open_url_with">Open UWL With :3</string>
+    <string name="msg_storage_permission_not_granted">Da stowage pewmission not gwanted (╥﹏╥)</string>
+    <string name="msg_file_saved_successfully">Da %1$s fiwe saved successfuwwy at \"%2$s\" x3</string>
+
+
+
+    <!-- Shell -->
+    <string name="error_sending_sigkill_to_process">Sending SIGKILL to pwocess on usew wequest ow because andwoid is kiwwing da execution sewvice nya (╥﹏╥)</string>
+    <string name="error_executable_unset">Executyabwe not set \"%1$s\" fow sheww command (・_・;)</string>
+    <string name="error_execution_cancelled">Execution has been cancelled since execution sewvice is being kiwwed (っ˘̩╭╮˘̩)っ</string>
+    <string name="error_failed_to_execute_termux_session_command">Faiwed to execuwte \"%1$s\" tewmux session command nya… (╯°□°)╯</string>
+    <string name="error_failed_to_execute_app_shell_command">Faiwed to execuwte \"%1$s\" app sheww command owo</string>
+    <string name="error_exception_received_while_executing_termux_session_command">Exception weceived whiwe executing \"%1$s\" tewmux session command.\nException: %2$s (・_・;)</string>
+    <string name="error_exception_received_while_executing_app_shell_command">Exception weceived whiwe executing \"%1$s\" app sheww command.\nException: %2$s uwu</string>
+
+
+
+    <!-- TermuxUtils -->
+    <string name="msg_report_issue">
+        If yowu want to wepowt dis issue, den copy its text fwom da options menu (3-dots on top wight) and post
+        an issue on one of da fowwowing winks.
+        \n\nIf yowu awe posting a Tewmux app cwash wepowt, den pwease pwovide detaiws on what yowu wewe doing dat
+        caused da cwash and how to wepwoduce it, if possybwle.
+        \n\nIf yowu awe posting an issue on GitHub, den post it in da wepositowy at which da wepowt bewongs at.
+        Issues opened ow emaiws sent with **(pawtial) scweenshots** instead of copied text ow a fiwe of dis wepowt
+        **wiww wikewy be automaticawwy cwosed/deweted**. Yowu may optionawwy wemove any device specific info dat
+        yowu considew pwivate ow don\'t want to shawe ow dat is not wewevant to da issue.
+        \n\nWe do not pwovide suppowt fow any hacking wewated toows/scwipts. Any questions asked abowt dem uvew emaiw,
+        on GitHub ow uvew officiaw tewmux community fowums **wiww wikewy be automaticawwy cwosed/deweted** and may
+        even wesuwt in **tempowawy ow pewmanent** ban. Check %1$s/wiki/Hacking fow detaiws. (っ˘̩╭╮˘̩)っ</string>
+
+    <string name="msg_termux_app_required_by_app">Da &TERMUX_APP_NAME; is wequiwed by da %1$s app to wun tewmux commands nya~</string>
+    <string name="error_termux_app_package_context_not_accessible">Da &TERMUX_APP_NAME; app (package context) is not accessyabwe. (╥﹏╥)</string>
+    <string name="error_termux_prefix_dir_path_not_accessible">Da &TERMUX_APP_NAME; app $PREFIX diwectowy is not accessyabwe by da %1$s app.
+        Dis may be because yowu have not instyawwed ow setup &TERMUX_APP_NAME; app ow
+        &TERMUX_APP_NAME; app and %1$s app bove have diffewent APK signatuwes because yowu managed to instyaww bove apps fwom diffewent souwces.
+        It may awso be because &TERMUX_APP_NAME; $PREFIX diwectowy \"&TERMUX_PREFIX_DIR_PATH;\" does not exist ow does not have wead,
+        wwite and execuwte pewmissions. (っ˘̩╭╮˘̩)っ</string>
+
+
+
+    <!-- Miscellaneous -->
+    <string name="action_yes">Yes (•̀ᴗ•́)و</string>
+    <string name="action_no">Nu (・_・;)</string>
+    <string name="action_copy">Copy-pwaste uwu</string>
+    <string name="action_share">Shawe x3</string>
+    <string name="action_cancel">Cancew owo</string>
+    <string name="action_save_to_file">Save To Fiwe nya~</string>
+
+    <string name="msg_storage_permission_granted_on_request">Da stowage pewmission gwanted by usew on wequest (•̀ᴗ•́)و</string>
+    <string name="msg_storage_permission_not_granted_on_request">Da stowage pewmission not gwanted by usew on wequest (╥﹏╥)</string>
+
+
+
+    <!-- Launcher Icons -->
+    <string name="action_enable_launcher_icon">Enyabwe Waunchew Icon x3</string>
+    <string name="action_disable_launcher_icon">Disyabwe Waunchew Icon owo</string>
+    <string name="msg_enabling_launcher_icon">Enyabwing %1$s app waunchew icon uwu</string>
+    <string name="msg_disabling_launcher_icon">Disyabwing %1$s app waunchew icon nya~</string>
+    <string name="setting_launcher_icon_title">Wauncher Icon Enyabwed ^-^</string>
+    <string name="setting_launcher_icon_enabled_off">Wauncher Icon wiww be disyabwed (・_・;)</string>
+    <string name="setting_launcher_icon_enabled_on">Wauncher Icon wiww be enyabwed. (Defauwt) :3</string>
+
+
+
+    <!-- Log Level -->
+    <string name="log_level_title">Wog Wevew (•ᴗ•)</string>
+    <string name="log_level_off">Off owo</string>
+    <string name="log_level_normal">Nowmaw uwu</string>
+    <string name="log_level_debug">Debug nya~</string>
+    <string name="log_level_verbose">Vewbose :3</string>
+    <string name="log_level_unknown">*Unknyown* (・_・;)</string>
+    <string name="log_level_value">Wogcat wog wevew set to \"%1$s\" x3</string>
+
+</resources>

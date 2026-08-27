@@ -247,7 +247,7 @@ class SharedProperties(
          *
          * @param propertiesFilePaths The [List] containing properties file paths.
          * @param logTag If log tag to use for logging errors.
-         * @return Returns the [File] object for Termux:Float app properties.
+         * @return Returns the [File] object for the app properties.
          */
         @JvmStatic
         fun getPropertiesFileFromList(propertiesFilePaths: List<String>?, logTag: String): File? {

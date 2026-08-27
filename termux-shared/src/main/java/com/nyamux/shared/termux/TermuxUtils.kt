@@ -81,39 +81,6 @@ class TermuxUtils {
         }
 
         /**
-         * Get the [Context] for [TermuxConstants.TERMUX_BOOT_PACKAGE_NAME] package.
-         *
-         * @param context The [Context] to use to get the [Context] of the package.
-         * @return Returns the [Context]. This will `null` if an exception is raised.
-         */
-        @JvmStatic
-        fun getTermuxBootPackageContext(context: Context): Context? {
-            return PackageUtils.getContextForPackage(context, TermuxConstants.TERMUX_BOOT_PACKAGE_NAME)
-        }
-
-        /**
-         * Get the [Context] for [TermuxConstants.TERMUX_FLOAT_PACKAGE_NAME] package.
-         *
-         * @param context The [Context] to use to get the [Context] of the package.
-         * @return Returns the [Context]. This will `null` if an exception is raised.
-         */
-        @JvmStatic
-        fun getTermuxFloatPackageContext(context: Context): Context? {
-            return PackageUtils.getContextForPackage(context, TermuxConstants.TERMUX_FLOAT_PACKAGE_NAME)
-        }
-
-        /**
-         * Get the [Context] for [TermuxConstants.TERMUX_STYLING_PACKAGE_NAME] package.
-         *
-         * @param context The [Context] to use to get the [Context] of the package.
-         * @return Returns the [Context]. This will `null` if an exception is raised.
-         */
-        @JvmStatic
-        fun getTermuxStylingPackageContext(context: Context): Context? {
-            return PackageUtils.getContextForPackage(context, TermuxConstants.TERMUX_STYLING_PACKAGE_NAME)
-        }
-
-        /**
          * Get the [Context] for [TermuxConstants.TERMUX_TASKER_PACKAGE_NAME] package.
          *
          * @param context The [Context] to use to get the [Context] of the package.
@@ -122,17 +89,6 @@ class TermuxUtils {
         @JvmStatic
         fun getTermuxTaskerPackageContext(context: Context): Context? {
             return PackageUtils.getContextForPackage(context, TermuxConstants.TERMUX_TASKER_PACKAGE_NAME)
-        }
-
-        /**
-         * Get the [Context] for [TermuxConstants.TERMUX_WIDGET_PACKAGE_NAME] package.
-         *
-         * @param context The [Context] to use to get the [Context] of the package.
-         * @return Returns the [Context]. This will `null` if an exception is raised.
-         */
-        @JvmStatic
-        fun getTermuxWidgetPackageContext(context: Context): Context? {
-            return PackageUtils.getContextForPackage(context, TermuxConstants.TERMUX_WIDGET_PACKAGE_NAME)
         }
 
         /** Wrapper for [PackageUtils.getContextForPackageOrExitApp]. */
@@ -542,11 +498,7 @@ class TermuxUtils {
             markdownString.append("\n\n### GitHub Issues for Termux apps\n")
             markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_APP_NAME, TermuxConstants.TERMUX_GITHUB_ISSUES_REPO_URL)).append("  ")
             markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_API_APP_NAME, TermuxConstants.TERMUX_API_GITHUB_ISSUES_REPO_URL)).append("  ")
-            markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_BOOT_APP_NAME, TermuxConstants.TERMUX_BOOT_GITHUB_ISSUES_REPO_URL)).append("  ")
-            markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_FLOAT_APP_NAME, TermuxConstants.TERMUX_FLOAT_GITHUB_REPO_URL)).append("  ")
-            markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_STYLING_APP_NAME, TermuxConstants.TERMUX_STYLING_GITHUB_ISSUES_REPO_URL)).append("  ")
             markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_TASKER_APP_NAME, TermuxConstants.TERMUX_TASKER_GITHUB_ISSUES_REPO_URL)).append("  ")
-            markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_WIDGET_APP_NAME, TermuxConstants.TERMUX_WIDGET_GITHUB_ISSUES_REPO_URL)).append("  ")
 
             markdownString.append("\n\n### GitHub Issues for Termux packages\n")
             markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_PACKAGES_GITHUB_REPO_NAME, TermuxConstants.TERMUX_PACKAGES_GITHUB_ISSUES_REPO_URL)).append("  ")
@@ -573,11 +525,7 @@ class TermuxUtils {
             markdownString.append("\n\n### GitHub\n")
             markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_APP_NAME, TermuxConstants.TERMUX_GITHUB_REPO_URL)).append("  ")
             markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_API_APP_NAME, TermuxConstants.TERMUX_API_GITHUB_REPO_URL)).append("  ")
-            markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_BOOT_APP_NAME, TermuxConstants.TERMUX_BOOT_GITHUB_REPO_URL)).append("  ")
-            markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_FLOAT_APP_NAME, TermuxConstants.TERMUX_FLOAT_GITHUB_REPO_URL)).append("  ")
-            markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_STYLING_APP_NAME, TermuxConstants.TERMUX_STYLING_GITHUB_REPO_URL)).append("  ")
             markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_TASKER_APP_NAME, TermuxConstants.TERMUX_TASKER_GITHUB_REPO_URL)).append("  ")
-            markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_WIDGET_APP_NAME, TermuxConstants.TERMUX_WIDGET_GITHUB_REPO_URL)).append("  ")
             markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_PACKAGES_GITHUB_REPO_NAME, TermuxConstants.TERMUX_PACKAGES_GITHUB_REPO_URL)).append("  ")
 
             markdownString.append("\n\n### Email\n")

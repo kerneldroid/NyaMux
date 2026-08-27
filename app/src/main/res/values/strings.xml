@@ -4,11 +4,7 @@
     <!ENTITY TERMUX_PACKAGE_NAME "com.nyamux">
     <!ENTITY TERMUX_APP_NAME "Nyamux">
     <!ENTITY TERMUX_API_APP_NAME "Nyamux:API">
-    <!ENTITY TERMUX_BOOT_APP_NAME "Nyamux:Boot">
-    <!ENTITY TERMUX_FLOAT_APP_NAME "Nyamux:Float">
-    <!ENTITY TERMUX_STYLING_APP_NAME "Nyamux:Styling">
     <!ENTITY TERMUX_TASKER_APP_NAME "Nyamux:Tasker">
-    <!ENTITY TERMUX_WIDGET_APP_NAME "Nyamux:Widget">
     ]>
 
 <resources>
@@ -82,7 +78,6 @@
     <string name="action_kill_process">Kill process (%d)</string>
     <string name="title_confirm_kill_process">Really kill this session?</string>
 
-    <string name="action_style_terminal">Style</string>
     <string name="action_toggle_keep_screen_on">Keep screen on</string>
     <string name="action_open_help">Help</string>
     <string name="action_open_settings">Settings</string>
@@ -91,8 +86,6 @@
     <string name="msg_generating_report">Generating Report</string>
     <string name="msg_add_termux_debug_info">Add termux debug info to report?</string>
 
-    <string name="error_styling_not_installed">The &TERMUX_STYLING_APP_NAME; Plugin App is not installed.</string>
-    <string name="action_styling_install">Install</string>
 
 
 
@@ -211,21 +204,9 @@
 
 
 
-    <!-- Termux:Float App Preferences -->
-    <string name="termux_float_preferences_title">&TERMUX_FLOAT_APP_NAME;</string>
-    <string name="termux_float_preferences_summary">Preferences for &TERMUX_FLOAT_APP_NAME; app</string>
-
-
-
     <!-- Termux:Tasker App Preferences -->
     <string name="termux_tasker_preferences_title">&TERMUX_TASKER_APP_NAME;</string>
     <string name="termux_tasker_preferences_summary">Preferences for &TERMUX_TASKER_APP_NAME; app</string>
-
-
-
-    <!-- Termux:Widget App Preferences -->
-    <string name="termux_widget_preferences_title">&TERMUX_WIDGET_APP_NAME;</string>
-    <string name="termux_widget_preferences_summary">Preferences for &TERMUX_WIDGET_APP_NAME; app</string>
 
 
 
@@ -235,4 +216,96 @@
     <!-- Donate Preference -->
     <string name="donate_preference_title">Donate</string>
 
+
+
+    <!-- Drawer -->
+    <string name="drawer_sessions">Sessions</string>
+    <string name="drawer_session_fallback_title">Terminal</string>
+    <string name="drawer_action_kill">Kill</string>
+    <string name="drawer_action_rename">Rename</string>
+    <string name="drawer_action_switch_to">Switch to</string>
+    <string name="drawer_action_new">New</string>
+    <string name="drawer_rename_dialog_title">Rename Session</string>
+    <string name="drawer_session_name_label">Session name</string>
+
+
+
+    <!-- Terminal toolbar -->
+    <string name="toolbar_locked">Locked</string>
+    <string name="toolbar_show_keys">Show Keys</string>
+    <string name="toolbar_send_hint">Send to terminal...</string>
+    <string name="toolbar_send">Send</string>
+
+
+
+    <!-- Terminal context menu -->
+    <string name="ctx_title">Terminal Actions</string>
+    <string name="ctx_reset_terminal">Reset terminal</string>
+    <string name="ctx_kill_process">Kill process</string>
+
+
+
+    <!-- Shared actions -->
+    <string name="action_cancel">Cancel</string>
+    <string name="action_back">Back</string>
+
+
+
+    <!-- Settings -->
+    <string name="settings_general_title">General</string>
+    <string name="settings_general_summary">Appearance, behavior, terminal setup</string>
+    <string name="settings_debugging_title">Debugging</string>
+    <string name="settings_debugging_summary">Logging, key logging, and notifications</string>
+    <string name="settings_terminal_io_title">Terminal IO</string>
+    <string name="settings_terminal_io_summary">Soft keyboard behavior and input</string>
+    <string name="settings_terminal_view_title">Terminal View</string>
+    <string name="settings_terminal_view_summary">Colors, margins, scaling</string>
+    <string name="settings_ui_customization_title">UI Customization</string>
+    <string name="settings_ui_customization_summary">Colors, fonts, styling</string>
+    <string name="settings_plugins_header">Plugins</string>
+    <string name="settings_plugin_api_summary">API access configuration</string>
+    <string name="settings_plugin_tasker_summary">Tasker integration</string>
+    <string name="settings_about_item_title">About &TERMUX_APP_NAME;</string>
+    <string name="settings_about_item_summary">App info and device details</string>
+    <string name="settings_donate_summary">Support the development</string>
+    <string name="settings_log_level_unknown">Unknown</string>
+    <string name="settings_colors_header">Colors</string>
+    <string name="settings_use_termux_colors">Use Termux Colors</string>
+    <string name="settings_use_termux_colors_on">Currently using colors from your Termux theme (.termux/colors.properties)</string>
+    <string name="settings_use_termux_colors_off">Currently using system Material You (Monet) dynamic colors</string>
+    <string name="settings_typography_header">Typography</string>
+    <string name="settings_font_family_title">UI Font Family</string>
+    <string name="settings_font_google_sans_code">Google Sans Code (Default)</string>
+    <string name="settings_font_system">System Font</string>
+    <string name="settings_font_termux">Termux Font</string>
+
+
+
+    <!-- About screen -->
+    <string name="about_title">About</string>
+    <string name="about_report_title">About</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_diagnostics_header">App Diagnostics</string>
+    <string name="about_device_header">Device Info</string>
+    <string name="about_community_header">Community &amp; Links</string>
+    <string name="about_github_title">GitHub Repository</string>
+    <string name="about_github_summary">Source code and issue tracker</string>
+    <string name="about_wiki_title">Termux Wiki</string>
+    <string name="about_wiki_summary">Guides, tips, and documentation</string>
+    <string name="about_reddit_title">Reddit Community</string>
+    <string name="about_reddit_summary">Discussion and support on r/termux</string>
+    <string name="about_error_app_info">Unable to load app info</string>
+    <string name="about_error_device_info">Unable to load device info</string>
+
+
+
+
+    <!-- Languages -->
+    <string name="settings_languages_title">Languages</string>
+    <string name="settings_languages_summary">App language</string>
+    <string name="settings_languages_header">Language</string>
+    <string name="settings_language_english_title">English</string>
+    <string name="settings_language_english_summary">System default</string>
+    <string name="settings_language_enl_title">Enl</string>
+    <string name="settings_language_enl_summary">Very cringe nyash translation</string>
 </resources>

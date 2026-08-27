@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -253,7 +254,7 @@ fun TermuxDrawerContent(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Sessions",
+                        text = stringResource(R.string.drawer_sessions),
                         style = MaterialTheme.typography.headlineMedium,
                         color = MaterialTheme.colorScheme.onSurface
                     )
@@ -269,7 +270,7 @@ fun TermuxDrawerContent(
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.Settings,
-                            contentDescription = "Settings",
+                            contentDescription = stringResource(R.string.action_open_settings),
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
@@ -332,7 +333,7 @@ fun TermuxDrawerContent(
                                 Spacer(modifier = Modifier.width(16.dp))
                                 Column {
                                     val sessionName = session.terminalSession?.mSessionName
-                                    val title = session.terminalSession?.title ?: "Terminal"
+                                    val title = session.terminalSession?.title ?: stringResource(R.string.drawer_session_fallback_title)
                                     if (sessionName?.isNotEmpty() == true) {
                                         Text(
                                             text = sessionName,
@@ -360,7 +361,7 @@ fun TermuxDrawerContent(
                                 onDismissRequest = { showContextMenu = false }
                             ) {
                                 DropdownMenuItem(
-                                    text = { Text("Kill") },
+                                    text = { Text(stringResource(R.string.drawer_action_kill)) },
                                     leadingIcon = {
                                         Icon(
                                             Icons.Rounded.Delete,
@@ -374,7 +375,7 @@ fun TermuxDrawerContent(
                                     }
                                 )
                                 DropdownMenuItem(
-                                    text = { Text("Rename") },
+                                    text = { Text(stringResource(R.string.drawer_action_rename)) },
                                     leadingIcon = {
                                         Icon(
                                             Icons.Rounded.Edit,
@@ -389,7 +390,7 @@ fun TermuxDrawerContent(
                                     }
                                 )
                                 DropdownMenuItem(
-                                    text = { Text("Switch to") },
+                                    text = { Text(stringResource(R.string.drawer_action_switch_to)) },
                                     leadingIcon = {
                                         Icon(
                                             Icons.Rounded.PushPin,
@@ -417,7 +418,7 @@ fun TermuxDrawerContent(
                         modifier = Modifier.weight(1f).height(56.dp),
                         shape = SessionRowShape
                     ) {
-                        Icon(Icons.Rounded.Keyboard, contentDescription = "Keyboard")
+                        Icon(Icons.Rounded.Keyboard, contentDescription = stringResource(R.string.action_toggle_soft_keyboard))
                     }
                     
                     Button(
@@ -425,9 +426,9 @@ fun TermuxDrawerContent(
                         modifier = Modifier.weight(1f).height(56.dp),
                         shape = SessionRowShape
                     ) {
-                        Icon(Icons.Rounded.Add, contentDescription = "New Session")
+                        Icon(Icons.Rounded.Add, contentDescription = stringResource(R.string.action_new_session))
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("New", style = MaterialTheme.typography.labelLarge)
+                        Text(stringResource(R.string.drawer_action_new), style = MaterialTheme.typography.labelLarge)
                     }
                 }
             }
@@ -437,24 +438,24 @@ fun TermuxDrawerContent(
     if (showRenameDialog && renameTarget != null) {
         AlertDialog(
             onDismissRequest = { showRenameDialog = false },
-            title = { Text("Rename Session") },
+            title = { Text(stringResource(R.string.drawer_rename_dialog_title)) },
             text = {
                 OutlinedTextField(
                     value = renameText,
                     onValueChange = { renameText = it },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text("Session name") }
+                    label = { Text(stringResource(R.string.drawer_session_name_label)) }
                 )
             },
             confirmButton = {
                 TextButton(onClick = {
                     renameTarget!!.terminalSession?.mSessionName = renameText
                     showRenameDialog = false
-                }) { Text("Rename") }
+                }) { Text(stringResource(R.string.drawer_action_rename)) }
             },
             dismissButton = {
-                TextButton(onClick = { showRenameDialog = false }) { Text("Cancel") }
+                TextButton(onClick = { showRenameDialog = false }) { Text(stringResource(R.string.action_cancel)) }
             }
         )
     }

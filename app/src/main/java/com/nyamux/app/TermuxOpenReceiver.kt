@@ -208,9 +208,7 @@ class TermuxOpenReceiver : BroadcastReceiver() {
                 // **DO NOT** allow these files to be modified by ContentProvider exposed to external
                 // apps, since they may silently modify the values for security properties like
                 // TermuxConstants.PROP_ALLOW_EXTERNAL_APPS set by users without their explicit consent.
-                if (TermuxConstants.TERMUX_PROPERTIES_FILE_PATHS_LIST.contains(path) ||
-                    TermuxConstants.TERMUX_FLOAT_PROPERTIES_FILE_PATHS_LIST.contains(path)
-                ) {
+                if (TermuxConstants.TERMUX_PROPERTIES_FILE_PATHS_LIST.contains(path)) {
                     resolvedMode = "r"
                 }
 

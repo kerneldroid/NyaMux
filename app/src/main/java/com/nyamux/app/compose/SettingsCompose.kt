@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.os.Environment
 import androidx.activity.compose.BackHandler
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -19,8 +20,10 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.core.os.LocaleListCompat
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
@@ -32,13 +35,12 @@ import com.nyamux.shared.file.FileUtils
 import com.nyamux.shared.interact.ShareUtils
 import com.nyamux.shared.models.ReportInfo
 import com.nyamux.app.models.UserAction
+import com.nyamux.R
 import com.nyamux.shared.android.AndroidUtils
 import com.nyamux.shared.termux.TermuxConstants
 import com.nyamux.shared.termux.TermuxUtils
 import com.nyamux.shared.termux.settings.preferences.TermuxAPIAppSharedPreferences
-import com.nyamux.shared.termux.settings.preferences.TermuxFloatAppSharedPreferences
 import com.nyamux.shared.termux.settings.preferences.TermuxTaskerAppSharedPreferences
-import com.nyamux.shared.termux.settings.preferences.TermuxWidgetAppSharedPreferences
 import com.nyamux.shared.termux.settings.preferences.TermuxAppSharedPreferences
 import com.nyamux.shared.logger.Logger
 import androidx.compose.ui.res.stringResource
@@ -46,7 +48,7 @@ import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.delay
 
 enum class SettingsScreen {
-    MAIN, TERMUX, DEBUGGING, TERMINAL_IO, TERMINAL_VIEW, UI_CUSTOMIZATION, ABOUT
+    MAIN, TERMUX, DEBUGGING, TERMINAL_IO, TERMINAL_VIEW, UI_CUSTOMIZATION, LANGUAGES, ABOUT
 }
 
 /** Shared plaque container shape so grouped tiles keep one corner family. */
@@ -60,9 +62,7 @@ fun TermuxSettingsScreen(activity: Activity) {
     var currentScreen by remember { mutableStateOf(SettingsScreen.MAIN) }
 
     val hasTermuxApi = remember { TermuxAPIAppSharedPreferences.build(context, false) != null }
-    val hasTermuxFloat = remember { TermuxFloatAppSharedPreferences.build(context, false) != null }
     val hasTermuxTasker = remember { TermuxTaskerAppSharedPreferences.build(context, false) != null }
-    val hasTermuxWidget = remember { TermuxWidgetAppSharedPreferences.build(context, false) != null }
     
     val showDonate = remember {
         val digest = PackageUtils.getSigningCertificateSHA256DigestForPackage(context)
@@ -71,10 +71,7 @@ fun TermuxSettingsScreen(activity: Activity) {
 
     BackHandler(enabled = currentScreen != SettingsScreen.MAIN) {
         when (currentScreen) {
-            SettingsScreen.TERMUX -> currentScreen = SettingsScreen.MAIN
-            SettingsScreen.ABOUT -> currentScreen = SettingsScreen.MAIN
-            SettingsScreen.UI_CUSTOMIZATION -> currentScreen = SettingsScreen.TERMUX
-            else -> currentScreen = SettingsScreen.TERMUX
+            else -> currentScreen = SettingsScreen.MAIN
         }
     }
 
@@ -93,13 +90,10 @@ fun TermuxSettingsScreen(activity: Activity) {
                     IconButton(onClick = { 
                         when (currentScreen) {
                             SettingsScreen.MAIN -> activity.finish()
-                            SettingsScreen.TERMUX -> currentScreen = SettingsScreen.MAIN
-                            SettingsScreen.ABOUT -> currentScreen = SettingsScreen.MAIN
-                            SettingsScreen.UI_CUSTOMIZATION -> currentScreen = SettingsScreen.TERMUX
-                            else -> currentScreen = SettingsScreen.TERMUX
+                            else -> currentScreen = SettingsScreen.MAIN
                         }
                     }) {
-                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.action_back))
                     }
                     Spacer(modifier = Modifier.width(8.dp))
                     AnimatedContent(
@@ -112,13 +106,14 @@ fun TermuxSettingsScreen(activity: Activity) {
                     ) { screen ->
                         Text(
                             text = when (screen) {
-                                SettingsScreen.MAIN -> "Settings"
-                                SettingsScreen.TERMUX -> "General"
-                                SettingsScreen.DEBUGGING -> "Debugging"
-                                SettingsScreen.TERMINAL_IO -> "Terminal IO"
-                                SettingsScreen.TERMINAL_VIEW -> "Terminal View"
-                                SettingsScreen.UI_CUSTOMIZATION -> "UI Customization"
-                                SettingsScreen.ABOUT -> "About"
+                                SettingsScreen.MAIN -> stringResource(R.string.action_open_settings)
+                                SettingsScreen.TERMUX -> stringResource(R.string.settings_general_title)
+                                SettingsScreen.DEBUGGING -> stringResource(R.string.settings_debugging_title)
+                                SettingsScreen.TERMINAL_IO -> stringResource(R.string.settings_terminal_io_title)
+                                SettingsScreen.TERMINAL_VIEW -> stringResource(R.string.settings_terminal_view_title)
+                                SettingsScreen.UI_CUSTOMIZATION -> stringResource(R.string.settings_ui_customization_title)
+                                SettingsScreen.LANGUAGES -> stringResource(R.string.settings_languages_title)
+                                SettingsScreen.ABOUT -> stringResource(R.string.about_title)
                             },
                             style = MaterialTheme.typography.titleLarge,
                             color = MaterialTheme.colorScheme.onSurface
@@ -153,19 +148,30 @@ fun TermuxSettingsScreen(activity: Activity) {
                         ) {
                             item {
                                 SettingsActionItem(
-                                    title = "General",
-                                    summary = "Appearance, behavior, terminal setup",
+                                    title = stringResource(R.string.settings_general_title),
+                                    summary = stringResource(R.string.settings_general_summary),
                                     icon = Icons.Rounded.Terminal,
                                     shape = PlaqueShape,
                                     iconShape = MaterialShapes.Cookie12Sided.toShape(),
                                     onClick = { currentScreen = SettingsScreen.TERMUX }
                                 )
                             }
+
+                            item {
+                                SettingsActionItem(
+                                    title = stringResource(R.string.settings_languages_title),
+                                    summary = stringResource(R.string.settings_languages_summary),
+                                    icon = Icons.Rounded.Language,
+                                    shape = PlaqueShape,
+                                    iconShape = MaterialShapes.Cookie4Sided.toShape(),
+                                    onClick = { currentScreen = SettingsScreen.LANGUAGES }
+                                )
+                            }
                             
-                            if (hasTermuxApi || hasTermuxFloat || hasTermuxTasker || hasTermuxWidget) {
+                            if (hasTermuxApi || hasTermuxTasker) {
                                 item {
                                     Text(
-                                        text = "Plugins",
+                                        text = stringResource(R.string.settings_plugins_header),
                                         style = MaterialTheme.typography.labelLarge,
                                         color = MaterialTheme.colorScheme.primary,
                                         modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
@@ -175,8 +181,8 @@ fun TermuxSettingsScreen(activity: Activity) {
                                 if (hasTermuxApi) {
                                     item {
                                         SettingsActionItem(
-                                            title = "Termux:API",
-                                            summary = "API access configuration",
+                                            title = stringResource(R.string.termux_api_preferences_title),
+                                            summary = stringResource(R.string.settings_plugin_api_summary),
                                             icon = Icons.Rounded.Extension,
                                             shape = PlaqueShape,
                                             iconShape = MaterialShapes.Cookie9Sided.toShape(),
@@ -184,38 +190,14 @@ fun TermuxSettingsScreen(activity: Activity) {
                                         )
                                     }
                                 }
-                                if (hasTermuxFloat) {
-                                    item {
-                                        SettingsActionItem(
-                                            title = "Termux:Float",
-                                            summary = "Floating window configuration",
-                                            icon = Icons.Rounded.PictureInPicture,
-                                            shape = PlaqueShape,
-                                            iconShape = MaterialShapes.Slanted.toShape(),
-                                            onClick = {}
-                                        )
-                                    }
-                                }
                                 if (hasTermuxTasker) {
                                     item {
                                         SettingsActionItem(
-                                            title = "Termux:Tasker",
-                                            summary = "Tasker integration",
+                                            title = stringResource(R.string.termux_tasker_preferences_title),
+                                            summary = stringResource(R.string.settings_plugin_tasker_summary),
                                             icon = Icons.Rounded.Task,
                                             shape = PlaqueShape,
                                             iconShape = MaterialShapes.Pentagon.toShape(),
-                                            onClick = {}
-                                        )
-                                    }
-                                }
-                                if (hasTermuxWidget) {
-                                    item {
-                                        SettingsActionItem(
-                                            title = "Termux:Widget",
-                                            summary = "Widget configuration",
-                                            icon = Icons.Rounded.Widgets,
-                                            shape = PlaqueShape,
-                                            iconShape = MaterialShapes.Cookie4Sided.toShape(),
                                             onClick = {}
                                         )
                                     }
@@ -224,14 +206,14 @@ fun TermuxSettingsScreen(activity: Activity) {
 
                             item {
                                 Text(
-                                    text = "About",
+                                    text = stringResource(R.string.about_title),
                                     style = MaterialTheme.typography.labelLarge,
                                     color = MaterialTheme.colorScheme.primary,
                                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
                                 )
                                 SettingsActionItem(
-                                    title = "About Nyamux",
-                                    summary = "App info and device details",
+                                    title = stringResource(R.string.settings_about_item_title),
+                                    summary = stringResource(R.string.settings_about_item_summary),
                                     icon = Icons.Rounded.Info,
                                     shape = if (showDonate) RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp, bottomStart = 8.dp, bottomEnd = 8.dp) else PlaqueShape,
                                     iconShape = MaterialShapes.Sunny.toShape(),
@@ -242,8 +224,8 @@ fun TermuxSettingsScreen(activity: Activity) {
                             if (showDonate) {
                                 item {
                                     SettingsActionItem(
-                                        title = "Donate",
-                                        summary = "Support the development",
+                                        title = stringResource(R.string.donate_preference_title),
+                                        summary = stringResource(R.string.settings_donate_summary),
                                         icon = Icons.Rounded.Favorite,
                                         shape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp, bottomStart = 24.dp, bottomEnd = 24.dp),
                                         iconShape = MaterialShapes.Clover4Leaf.toShape(),
@@ -263,8 +245,8 @@ fun TermuxSettingsScreen(activity: Activity) {
                         ) {
                             item {
                                 SettingsActionItem(
-                                    title = "Debugging",
-                                    summary = "Logging, key logging, and notifications",
+                                    title = stringResource(R.string.settings_debugging_title),
+                                    summary = stringResource(R.string.settings_debugging_summary),
                                     icon = Icons.Rounded.BugReport,
                                     shape = PlaqueShape,
                                     iconShape = MaterialShapes.Boom.toShape(),
@@ -273,8 +255,8 @@ fun TermuxSettingsScreen(activity: Activity) {
                             }
                             item {
                                 SettingsActionItem(
-                                    title = "Terminal IO",
-                                    summary = "Soft keyboard behavior and input",
+                                    title = stringResource(R.string.settings_terminal_io_title),
+                                    summary = stringResource(R.string.settings_terminal_io_summary),
                                     icon = Icons.Rounded.Keyboard,
                                     shape = PlaqueShape,
                                     iconShape = MaterialShapes.Slanted.toShape(),
@@ -283,8 +265,8 @@ fun TermuxSettingsScreen(activity: Activity) {
                             }
                             item {
                                 SettingsActionItem(
-                                    title = "Terminal View",
-                                    summary = "Colors, margins, scaling",
+                                    title = stringResource(R.string.settings_terminal_view_title),
+                                    summary = stringResource(R.string.settings_terminal_view_summary),
                                     icon = Icons.Rounded.Visibility,
                                     shape = PlaqueShape,
                                     iconShape = MaterialShapes.Oval.toShape(),
@@ -293,8 +275,8 @@ fun TermuxSettingsScreen(activity: Activity) {
                             }
                             item {
                                 SettingsActionItem(
-                                    title = "UI Customization",
-                                    summary = "Colors, fonts, styling",
+                                    title = stringResource(R.string.settings_ui_customization_title),
+                                    summary = stringResource(R.string.settings_ui_customization_summary),
                                     icon = Icons.Rounded.Palette,
                                     shape = PlaqueShape,
                                     iconShape = MaterialShapes.Clover4Leaf.toShape(),
@@ -315,11 +297,84 @@ fun TermuxSettingsScreen(activity: Activity) {
                     SettingsScreen.UI_CUSTOMIZATION -> {
                         UICustomizationSettingsScreen(context)
                     }
+                    SettingsScreen.LANGUAGES -> {
+                        LanguagesSettingsScreen(activity)
+                    }
                     SettingsScreen.ABOUT -> {
                         AboutSettingsScreen(context)
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun LanguagesSettingsScreen(activity: Activity) {
+    val currentTag = AppCompatDelegate.getApplicationLocales().toLanguageTags()
+    val selected = remember(currentTag) { if (currentTag == "enl") "enl" else "en" }
+
+    val onLanguageSelected: (String) -> Unit = { tag ->
+        if (tag == "enl") {
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("enl"))
+        } else {
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList())
+        }
+    }
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
+        contentPadding = PaddingValues(top = 8.dp, bottom = 24.dp)
+    ) {
+        item {
+            SettingsGroup(title = stringResource(R.string.settings_languages_header)) {
+                LanguageOptionRow(
+                    title = stringResource(R.string.settings_language_english_title),
+                    summary = stringResource(R.string.settings_language_english_summary),
+                    selected = selected == "en",
+                    onClick = { onLanguageSelected("en") }
+                )
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+                LanguageOptionRow(
+                    title = stringResource(R.string.settings_language_enl_title),
+                    summary = stringResource(R.string.settings_language_enl_summary),
+                    selected = selected == "enl",
+                    onClick = { onLanguageSelected("enl") }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun LanguageOptionRow(
+    title: String,
+    summary: String,
+    selected: Boolean,
+    onClick: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(horizontal = 16.dp, vertical = 14.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        RadioButton(selected = selected, onClick = null)
+        Spacer(modifier = Modifier.width(12.dp))
+        Column {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Text(
+                text = summary,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 }
@@ -383,7 +438,7 @@ fun SettingsActionItem(
 
 private fun showAboutReport(context: Context) {
     Thread {
-        val title = "About"
+        val title = context.getString(R.string.about_report_title)
         val aboutString = java.lang.StringBuilder()
         aboutString.append(TermuxUtils.getAppInfoMarkdownString(context, TermuxUtils.AppInfoMode.TERMUX_AND_PLUGIN_PACKAGES))
         aboutString.append("\n\n").append(AndroidUtils.getDeviceInfoMarkdownString(context, true))
@@ -522,9 +577,10 @@ fun DebuggingSettingsScreen(context: Context) {
     
     val logLevels = remember { Logger.getLogLevelsArray() }
     val logLevelLabels = remember { Logger.getLogLevelLabelsArray(context, logLevels, true)!! }
-    val currentLogLevelLabel = remember(logLevel) {
+    val unknownLogLevelLabel = stringResource(R.string.settings_log_level_unknown)
+    val currentLogLevelLabel = remember(logLevel, unknownLogLevelLabel) {
         val index = logLevels.indexOf(logLevel.toString())
-        if (index >= 0 && index < logLevelLabels.size) logLevelLabels[index].toString() else "Unknown"
+        if (index >= 0 && index < logLevelLabels.size) logLevelLabels[index].toString() else unknownLogLevelLabel
     }
 
     LazyColumn(
@@ -624,7 +680,7 @@ fun DebuggingSettingsScreen(context: Context) {
             },
             confirmButton = {
                 TextButton(onClick = { showLogLevelDialog = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.action_cancel))
                 }
             }
         )
@@ -704,25 +760,27 @@ fun TerminalViewSettingsScreen(context: Context) {
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun AboutSettingsScreen(context: Context) {
-    val appInfo = remember {
+    val appInfoErrorText = stringResource(R.string.about_error_app_info)
+    val appInfo = remember(appInfoErrorText) {
         try {
             TermuxUtils.getAppInfoMarkdownString(context, TermuxUtils.AppInfoMode.TERMUX_AND_PLUGIN_PACKAGES).orEmpty()
                 .replace("### ", "")
                 .replace("## ", "")
                 .replace("* ", "• ")
         } catch (e: Exception) {
-            "Unable to load app info"
+            appInfoErrorText
         }
     }
     
-    val deviceInfo = remember {
+    val deviceInfoErrorText = stringResource(R.string.about_error_device_info)
+    val deviceInfo = remember(deviceInfoErrorText) {
         try {
             AndroidUtils.getDeviceInfoMarkdownString(context, true)
                 .replace("### ", "")
                 .replace("## ", "")
                 .replace("* ", "• ")
         } catch (e: Exception) {
-            "Unable to load device info"
+            deviceInfoErrorText
         }
     }
 
@@ -756,7 +814,7 @@ fun AboutSettingsScreen(context: Context) {
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Nyamux",
+                    text = stringResource(R.string.application_name),
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface
@@ -770,7 +828,7 @@ fun AboutSettingsScreen(context: Context) {
                     }
                 }
                 Text(
-                    text = "Version $packageVersion",
+                    text = stringResource(R.string.about_version, packageVersion ?: ""),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -778,7 +836,7 @@ fun AboutSettingsScreen(context: Context) {
         }
 
         item {
-            SettingsGroup(title = "App Diagnostics") {
+            SettingsGroup(title = stringResource(R.string.about_diagnostics_header)) {
                 Text(
                     text = appInfo,
                     style = MaterialTheme.typography.bodyMedium,
@@ -789,7 +847,7 @@ fun AboutSettingsScreen(context: Context) {
         }
 
         item {
-            SettingsGroup(title = "Device Info") {
+            SettingsGroup(title = stringResource(R.string.about_device_header)) {
                 Text(
                     text = deviceInfo,
                     style = MaterialTheme.typography.bodyMedium,
@@ -800,22 +858,22 @@ fun AboutSettingsScreen(context: Context) {
         }
 
         item {
-            SettingsGroup(title = "Community & Links") {
+            SettingsGroup(title = stringResource(R.string.about_community_header)) {
                 SettingListTile(
-                    title = "GitHub Repository",
-                    selectedValueLabel = "Source code and issue tracker",
+                    title = stringResource(R.string.about_github_title),
+                    selectedValueLabel = stringResource(R.string.about_github_summary),
                     onClick = { ShareUtils.openUrl(context, "https://github.com/kerneldroid/NyaMux") }
                 )
                 HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 SettingListTile(
-                    title = "Termux Wiki",
-                    selectedValueLabel = "Guides, tips, and documentation",
+                    title = stringResource(R.string.about_wiki_title),
+                    selectedValueLabel = stringResource(R.string.about_wiki_summary),
                     onClick = { ShareUtils.openUrl(context, "https://wiki.termux.com") }
                 )
                 HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 SettingListTile(
-                    title = "Reddit Community",
-                    selectedValueLabel = "Discussion and support on r/termux",
+                    title = stringResource(R.string.about_reddit_title),
+                    selectedValueLabel = stringResource(R.string.about_reddit_summary),
                     onClick = { ShareUtils.openUrl(context, "https://www.reddit.com/r/termux") }
                 )
             }
@@ -833,9 +891,9 @@ fun UICustomizationSettingsScreen(context: Context) {
     var showFontDialog by remember { mutableStateOf(false) }
 
     val fontLabels = mapOf(
-        "google_sans_code" to "Google Sans Code (Default)",
-        "system" to "System Font",
-        "termux_font" to "Termux Font"
+        "google_sans_code" to stringResource(R.string.settings_font_google_sans_code),
+        "system" to stringResource(R.string.settings_font_system),
+        "termux_font" to stringResource(R.string.settings_font_termux)
     )
 
     LazyColumn(
@@ -845,11 +903,11 @@ fun UICustomizationSettingsScreen(context: Context) {
         contentPadding = PaddingValues(bottom = 24.dp)
     ) {
         item {
-            SettingsGroup(title = "Colors") {
+            SettingsGroup(title = stringResource(R.string.settings_colors_header)) {
                 SettingSwitchTile(
-                    title = "Use Termux Colors",
-                    summaryOn = "Currently using colors from your Termux theme (.termux/colors.properties)",
-                    summaryOff = "Currently using system Material You (Monet) dynamic colors",
+                    title = stringResource(R.string.settings_use_termux_colors),
+                    summaryOn = stringResource(R.string.settings_use_termux_colors_on),
+                    summaryOff = stringResource(R.string.settings_use_termux_colors_off),
                     checked = colorMode == "termux",
                     onCheckedChange = { useTermux ->
                         val newMode = if (useTermux) "termux" else "monet"
@@ -861,10 +919,10 @@ fun UICustomizationSettingsScreen(context: Context) {
         }
 
         item {
-            SettingsGroup(title = "Typography") {
+            SettingsGroup(title = stringResource(R.string.settings_typography_header)) {
                 SettingListTile(
-                    title = "UI Font Family",
-                    selectedValueLabel = fontLabels[fontChoice] ?: "Google Sans Code",
+                    title = stringResource(R.string.settings_font_family_title),
+                    selectedValueLabel = fontLabels[fontChoice] ?: fontLabels.getValue("google_sans_code"),
                     onClick = { showFontDialog = true }
                 )
             }
@@ -876,7 +934,7 @@ fun UICustomizationSettingsScreen(context: Context) {
             onDismissRequest = { showFontDialog = false },
             title = {
                 Text(
-                    text = "UI Font Family",
+                    text = stringResource(R.string.settings_font_family_title),
                     style = MaterialTheme.typography.titleLarge
                 )
             },
@@ -915,7 +973,7 @@ fun UICustomizationSettingsScreen(context: Context) {
             },
             confirmButton = {
                 TextButton(onClick = { showFontDialog = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.action_cancel))
                 }
             }
         )

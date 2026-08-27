@@ -60,11 +60,7 @@ android {
         manifestPlaceholders.TERMUX_PACKAGE_NAME = "com.nyamux"
         manifestPlaceholders.TERMUX_APP_NAME = "Nyamux"
         manifestPlaceholders.TERMUX_API_APP_NAME = "Nyamux:API"
-        manifestPlaceholders.TERMUX_BOOT_APP_NAME = "Nyamux:Boot"
-        manifestPlaceholders.TERMUX_FLOAT_APP_NAME = "Nyamux:Float"
-        manifestPlaceholders.TERMUX_STYLING_APP_NAME = "Nyamux:Styling"
         manifestPlaceholders.TERMUX_TASKER_APP_NAME = "Nyamux:Tasker"
-        manifestPlaceholders.TERMUX_WIDGET_APP_NAME = "Nyamux:Widget"
 
         externalNativeBuild {
             ndkBuild {

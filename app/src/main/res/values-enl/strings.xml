@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE resources [
+    <!ENTITY TERMUX_PACKAGE_NAME "com.nyamux">
+    <!ENTITY TERMUX_APP_NAME "Nyamux">
+    <!ENTITY TERMUX_API_APP_NAME "Nyamux:API">
+    <!ENTITY TERMUX_TASKER_APP_NAME "Nyamux:Tasker">
+    ]>
+
+<resources>
+
+    <string name="application_name">&TERMUX_APP_NAME; :3</string>
+    <string name="shared_user_label">&TERMUX_APP_NAME; smow usew owo</string>
+
+
+
+    <!-- Termux RUN_COMMAND permission -->
+    <string name="permission_run_command_label">Wun commands in &TERMUX_APP_NAME; envywonment nya~</string>
+    <string name="permission_run_command_description">execuwte awbitwawy commands within &TERMUX_APP_NAME;
+        envywonment and access fiwes (•ᴗ•)</string>
+
+
+
+    <!-- Termux Bootstrap Packages Installation -->
+    <string name="bootstrap_installer_body">Instawwing boowstwap packages… (=ↀωↀ=)</string>
+    <string name="bootstrap_error_title">Can\'t instaww boowstwap (╯°□°)╯</string>
+    <string name="bootstrap_error_body">&TERMUX_APP_NAME; couwdn\'t instaww da boowstwap packages, sowwy nya… (っ˘̩╭╮˘̩)っ</string>
+    <string name="bootstrap_error_abort">Abowt (╯°□°)╯︵ ┻━┻</string>
+    <string name="bootstrap_error_try_again">Twry again nya! (•̀ᴗ•́)و</string>
+    <string name="bootstrap_error_not_primary_user_message">&TERMUX_APP_NAME; can onwy be wun as da pwimawy usew.
+        \nBoowstwap binawies compiwd fow &TERMUX_APP_NAME; have hawdcoded $PREFIX path and cannot be instyawwed
+        undew any path uvthew than:\n%1$s. (・_・;)</string>
+    <string name="bootstrap_error_installed_on_portable_sd">&TERMUX_APP_NAME; cannot be instyawwed on
+        powtabwe/extewnaw/wemovabwe sd cawd on yowur device.
+        \nBoowstwap binawies compiwd fow &TERMUX_APP_NAME; have hawdcoded $PREFIX path and cannot be instyawwed
+        undew any path uvthew than:\n%1$s. (╥﹏╥)</string>
+
+
+
+    <!-- Terminal Sidebar and Shortcuts -->
+    <string name="action_new_session">Nyew session owo</string>
+    <string name="action_new_session_failsafe">Faiwsafe (•ᴗ•)</string>
+    <string name="title_max_terminals_reached">Max tewminaws weached nya~!</string>
+    <string name="msg_max_terminals_reached">Cwose da owd ones befowe making nyew ones pwease :3</string>
+
+    <string name="title_rename_session">Set session nyame (◕‿◕)</string>
+    <string name="action_rename_session_confirm">Set :3</string>
+    <string name="title_create_named_session">Nyew named session x3</string>
+    <string name="action_create_named_session_confirm">Cweate (•̀ᴗ•́)و</string>
+
+    <string name="action_toggle_soft_keyboard">Keyboawd uwu</string>
+
+    <string name="msg_enabling_terminal_toolbar">Enyabwing Tewminaw Toowbaw :3</string>
+    <string name="msg_disabling_terminal_toolbar">Disyabwing Tewminaw Toowbaw (•ᴗ•)</string>
+
+
+
+    <!-- Terminal Popup -->
+    <string name="action_select_url">Sewect UWL (=^･ω･^=)</string>
+    <string name="title_select_url_dialog">Cwick UWL to copy, wong pwess to open nya~</string>
+    <string name="title_select_url_none_found">No UWLs found in da tewminaw… (っ˘̩╭╮˘̩)っ</string>
+    <string name="msg_select_url_copied_to_clipboard">UWL copied to cwipboawd x3</string>
+
+    <string name="action_share_transcript">Shawe twanscwipt owo</string>
+    <string name="title_share_transcript">Tewminaw twanscwipt ^_^</string>
+    <string name="title_share_transcript_with">Send twanscwipt to: :3</string>
+
+    <string name="action_share_selected_text">Shawe sewected text nya~</string>
+    <string name="title_share_selected_text">Tewminaw Text (•ᴗ•)</string>
+    <string name="title_share_selected_text_with">Send sewected text to: owo</string>
+
+    <string name="action_autofill_username">Autofiww usewname uwu</string>
+    <string name="action_autofill_password">Autofiww passwowd, shhh (˶˃ ᵕ ˂˶)</string>
+
+    <string name="action_reset_terminal">Weset (╯°□°)╯</string>
+    <string name="msg_terminal_reset">Tewminaw weset (•̀ᴗ•́)و</string>
+
+    <string name="action_kill_process">Kiwll pwocess (%d) (｡•̀ᴗ-)✧</string>
+    <string name="title_confirm_kill_process">Weawwy kiww dis session? (◕‿◕)</string>
+
+    <string name="action_toggle_keep_screen_on">Keep scween on uwu</string>
+    <string name="action_open_help">Hewp me pwease (っ˘̩╭╮˘̩)っ</string>
+    <string name="action_open_settings">Settiwngs ^_^</string>
+
+    <string name="action_report_issue">Wepowt Issue nya~!</string>
+    <string name="msg_generating_report">Genewating Wepowt (•ᴗ•)</string>
+    <string name="msg_add_termux_debug_info">Add tewmux debug info to wepowt pwease? :3</string>
+
+
+
+
+    <!-- Termux Notifications -->
+    <string name="notification_action_exit">Exit owo</string>
+    <string name="notification_action_wake_lock">Acquyire wakewock uwu</string>
+    <string name="notification_action_wake_unlock">Wewease wakewock :3</string>
+
+
+
+    <!-- TermuxService -->
+    <string name="error_display_over_other_apps_permission_not_granted_to_start_terminal">&TERMUX_APP_NAME; needs
+        da \"Dispway uvew uvthew apps\" pewmission to stawt tewminaw sessions fwom backgwound on Andwoid >= 10.
+        Gwants it fwom Settiwngs -> Apps -> &TERMUX_APP_NAME; -> Advanced (っ˘̩╭╮˘̩)っ</string>
+    <string name="error_termux_service_invalid_execution_command_runner">Invawid execution command wunnew to TermuxService: `%1$s` (╯°□°)╯</string>
+    <string name="error_termux_service_unsupported_execution_command_runner">Unsuppowted execution command wunnew to TermuxService: `%1$s` (・_・;)</string>
+    <string name="error_termux_service_unsupported_execution_command_shell_create_mode">Unsuppowted execution command sheww cweate mode to TermuxService: `%1$s` nya~?</string>
+    <string name="error_termux_service_execution_command_shell_name_unset">Sheww nyame not set but `%1$s` sheww cweate mode passed uwu</string>
+
+
+
+    <!-- Termux RunCommandService -->
+    <string name="error_run_command_service_invalid_intent_action">Invawid intent action to RunCommandService: `%1$s` (・_・;)</string>
+    <string name="error_run_command_service_invalid_execution_command_runner">Invawid execution command wunnew to RunCommandService: `%1$s` (╯°□°)╯</string>
+    <string name="error_run_command_service_mandatory_extra_missing">Mandatowy extwa missing to RunCommandService: \"%1$s\" nya~!</string>
+    <string name="error_run_command_service_api_help">Viswit %1$s fow mowe info on RUN_COMMAND Intent usage pwease uwu</string>
+
+
+
+    <!-- Termux File Receiver -->
+    <string name="title_file_received">Save fiwe in ~/downloads/ :3</string>
+    <string name="action_file_received_edit">Edwit x3</string>
+    <string name="action_file_received_open_directory">Open diwectowy owo</string>
+
+
+
+    <!-- Miscellaneous -->
+    <string name="error_termux_service_start_failed_general">Faiwed to stawt TermuxService. Check wogcat fow exception message (っ˘̩╭╮˘̩)っ</string>
+    <string name="error_termux_service_start_failed_bg">Faiwed to stawt TermuxService whiwe app is in backgwound, andwoid is being mean nya (╥﹏╥)</string>
+
+
+
+    <!-- Termux Settings -->
+    <string name="title_activity_termux_settings">&TERMUX_APP_NAME; Settiwngs ^_^</string>
+
+    <!-- Termux App Preferences -->
+    <string name="termux_preferences_title">&TERMUX_APP_NAME; :3</string>
+    <string name="termux_preferences_summary">Pwefewences fow &TERMUX_APP_NAME; app uwu</string>
+
+        <!-- Debugging Preferences -->
+        <string name="termux_debugging_preferences_title">Debuggying (•ᴗ•)</string>
+        <string name="termux_debugging_preferences_summary">Pwefewences fow debuggying nya~</string>
+
+            <!-- Logging Category -->
+            <string name="termux_logging_header">Wogging owo</string>
+
+                <!-- Log Level -->
+                <string name="termux_log_level_title">Wog Wevew x3</string>
+
+                <!-- Terminal View Key Logging -->
+                <string name="termux_terminal_view_key_logging_enabled_title">Tewminaw View Key Wogging (•ᴗ•)</string>
+                <string name="termux_terminal_view_key_logging_enabled_off">Wogs wiww not have entwies fow tewminaw view keys. (Defauwt) uwu</string>
+                <string name="termux_terminal_view_key_logging_enabled_on">Wogcat wogs wiww have entwies fow tewminaw view keys.
+                    Dey awe vewy vewbose and shouwd be disyabwed undew nowmaw ciwcumstances ow wiww cause pewfowmance issues nya~</string>
+
+                <!-- Plugin Error Notifications -->
+                <string name="termux_plugin_error_notifications_enabled_title">Pwugin Ewwow Notifications nya~</string>
+                <string name="termux_plugin_error_notifications_enabled_off">Disyabwe fwashes and notifications fow pwugin ewwows (•ᴗ•)</string>
+                <string name="termux_plugin_error_notifications_enabled_on">Show fwashes and notifications fow pwugin ewwows. (Defauwt) :3</string>
+
+                <!-- Crash Report Notifications -->
+                <string name="termux_crash_report_notifications_enabled_title">Cwash Wepowt Notifications x3</string>
+                <string name="termux_crash_report_notifications_enabled_off">Disyabwe notifications fow cwash wepowts owo</string>
+                <string name="termux_crash_report_notifications_enabled_on">Show notifications fow cwash wepowts. (Defauwt) uwu</string>
+
+
+        <!-- Terminal IO Preferences -->
+        <string name="termux_terminal_io_preferences_title">Tewminaw I/O :3</string>
+        <string name="termux_terminal_io_preferences_summary">Pwefewences fow tewminaw I/O nya~</string>
+
+            <!-- Keyboard Category -->
+            <string name="termux_keyboard_header">Keyboawd ^-^</string>
+
+                <!-- Soft Keyboard -->
+                <string name="termux_soft_keyboard_enabled_title">Soft Keyboawd Enyabwed (•ᴗ•)</string>
+                <string name="termux_soft_keyboard_enabled_off">Soft keyboawd wiww be disyabwed. (╥﹏╥)</string>
+                <string name="termux_soft_keyboard_enabled_on">Soft keyboawd wiww be enyabwed. (Defauwt) x3</string>
+
+                <!-- Soft Keyboard Only If No Hardware-->
+                <string name="termux_soft_keyboard_enabled_only_if_no_hardware_title">Soft Keyboawd Onwy If No Hawdware owo</string>
+                <string name="termux_soft_keyboard_enabled_only_if_no_hardware_off">Soft keyboawd wiww be enyabwed even if
+                    hawdware keyboawd is connected. (Defauwt) uwu</string>
+                <string name="termux_soft_keyboard_enabled_only_if_no_hardware_on">Soft keyboawd wiww be enyabwed onwy if
+                    no hawdware keyboawd is connected nya~</string>
+
+
+        <!-- Terminal View Preferences -->
+        <string name="termux_terminal_view_preferences_title">Tewminaw View (•ᴗ•)</string>
+        <string name="termux_terminal_view_preferences_summary">Pwefewences fow tewminaw view uwu</string>
+
+            <!-- View Category -->
+            <string name="termux_terminal_view_view_header">View :3</string>
+
+                <!-- Terminal View Margin Adjustment -->
+                <string name="termux_terminal_view_terminal_margin_adjustment_title">Tewminaw Mawgin Adjustment nya~</string>
+                <string name="termux_terminal_view_terminal_margin_adjustment_off">Tewminaw mawgin adjustment wiww be disyabwed (•ᴗ•)</string>
+                <string name="termux_terminal_view_terminal_margin_adjustment_on">Tewminaw mawgin adjustment wiww be enyabwed.
+                    It shouwd be enyabwed to twy to fix da issue whewe soft keyboawd covews pawt of extwa keys/tewminaw view.
+                    If it causes scween fwickewing on yowur devices, den disyabwe it. (Defauwt) :3</string>
+
+
+
+    <!-- Termux:API App Preferences -->
+    <string name="termux_api_preferences_title">&TERMUX_API_APP_NAME; ✧</string>
+    <string name="termux_api_preferences_summary">Pwefewences fow &TERMUX_API_APP_NAME; app owo</string>
+
+
+
+    <!-- Termux:Tasker App Preferences -->
+    <string name="termux_tasker_preferences_title">&TERMUX_TASKER_APP_NAME; ᕙ(⇀‸↼‶)ᕗ</string>
+    <string name="termux_tasker_preferences_summary">Pwefewences fow &TERMUX_TASKER_APP_NAME; app nya~</string>
+
+
+
+    <!-- About Preference -->
+    <string name="about_preference_title">Abwut ^_^</string>
+
+    <!-- Donate Preference -->
+    <string name="donate_preference_title">Donate monies pwease (｡♥‿♥｡)</string>
+
+
+
+    <!-- Drawer -->
+    <string name="drawer_sessions">Sessions x3</string>
+    <string name="drawer_session_fallback_title">Tewminaw (•ᴗ•)</string>
+    <string name="drawer_action_kill">Kiwll (｡•̀ᴗ-)✧</string>
+    <string name="drawer_action_rename">Wename :3</string>
+    <string name="drawer_action_switch_to">Switch to owo</string>
+    <string name="drawer_action_new">Nyew uwu</string>
+    <string name="drawer_rename_dialog_title">Wename Session (◕‿◕)</string>
+    <string name="drawer_session_name_label">Session nyame nya~</string>
+
+
+
+    <!-- Terminal toolbar -->
+    <string name="toolbar_locked">Wocked (=^･ω･^=)</string>
+    <string name="toolbar_show_keys">Show Keys pwease ^-^</string>
+    <string name="toolbar_send_hint">Send to tewminaw... (•ᴗ•)</string>
+    <string name="toolbar_send">Send it nya~</string>
+
+
+
+    <!-- Terminal context menu -->
+    <string name="ctx_title">Tewminaw Actions x3</string>
+    <string name="ctx_reset_terminal">Weset tewminaw (╯°□°)╯</string>
+    <string name="ctx_kill_process">Kiwll pwocess (｡•̀ᴗ-)✧</string>
+
+
+
+    <!-- Shared actions -->
+    <string name="action_cancel">Cancew :3</string>
+    <string name="action_back">Back uwu</string>
+
+
+
+    <!-- Settings -->
+    <string name="settings_general_title">Genewal ^_^</string>
+    <string name="settings_general_summary">Appeawance, behaviow, tewminaw setup :3</string>
+    <string name="settings_debugging_title">Debuggying (•ᴗ•)</string>
+    <string name="settings_debugging_summary">Wogging, key wogging, and notifications nya~</string>
+    <string name="settings_terminal_io_title">Tewminaw IO x3</string>
+    <string name="settings_terminal_io_summary">Soft keyboawd behaviow and input owo</string>
+    <string name="settings_terminal_view_title">Tewminaw View uwu</string>
+    <string name="settings_terminal_view_summary">Cowows, mawgins, scawing :3</string>
+    <string name="settings_ui_customization_title">UI Customizyation (◕‿◕)</string>
+    <string name="settings_ui_customization_summary">Cowows, fonts, stywing ✧</string>
+    <string name="settings_plugins_header">Pwugins x3</string>
+    <string name="settings_plugin_api_summary">API access configuwation (•ᴗ•)</string>
+    <string name="settings_plugin_tasker_summary">Tasker integyation owo</string>
+    <string name="settings_about_item_title">Abwut &TERMUX_APP_NAME; ^-^</string>
+    <string name="settings_about_item_summary">App info and device detaiws uwu</string>
+    <string name="settings_donate_summary">Suppowt da devewopment pwease (｡♥‿♥｡)</string>
+    <string name="settings_log_level_unknown">Unknyown (・_・;)</string>
+    <string name="settings_colors_header">Cowows nya~</string>
+    <string name="settings_use_termux_colors">Use Tewmux Cowows (◕ᴗ◕✿)</string>
+    <string name="settings_use_termux_colors_on">Cuwwentwy using cowows fwom yowur Tewmux theme (.termux/colors.properties) x3</string>
+    <string name="settings_use_termux_colors_off">Cuwwentwy using system Matewiaw You (Monet) dynamic cowows uwu</string>
+    <string name="settings_typography_header">Typogwaphy :3</string>
+    <string name="settings_font_family_title">UI Font Famiwy (•ᴗ•)</string>
+    <string name="settings_font_google_sans_code">Google Sans Code (Defauwt) owo</string>
+    <string name="settings_font_system">System Font nya~</string>
+    <string name="settings_font_termux">Tewmux Font ^-^</string>
+
+
+
+    <!-- About screen -->
+    <string name="about_title">Abwut x3</string>
+    <string name="about_report_title">Abwut (•ᴗ•)</string>
+    <string name="about_version">Vewsion %1$s (◕‿◕)</string>
+    <string name="about_diagnostics_header">App Diagnowstics owo</string>
+    <string name="about_device_header">Device Info :3</string>
+    <string name="about_community_header">Community &amp; Winks nya~</string>
+    <string name="about_github_title">GitHub Wepository (•̀ᴗ•́)و</string>
+    <string name="about_github_summary">Souwce code and issue twackew x3</string>
+    <string name="about_wiki_title">Tewmux Wiki owo</string>
+    <string name="about_wiki_summary">Guides, tips, and documentation uwu</string>
+    <string name="about_reddit_title">Reddit Community :3</string>
+    <string name="about_reddit_summary">Discussion and suppowt on r/termux pwease ^-^</string>
+    <string name="about_error_app_info">Unyabwe to woad app info (っ˘̩╭╮˘̩)っ</string>
+    <string name="about_error_device_info">Unyabwe to woad device info (╥﹏╥)</string>
+
+
+
+
+    <!-- Languages -->
+    <string name="settings_languages_title">Wanguages (◕ᴗ◕✿)</string>
+    <string name="settings_languages_summary">App wanguage nya~</string>
+    <string name="settings_languages_header">Wanguage :3</string>
+    <string name="settings_language_english_title">Engwish :3</string>
+    <string name="settings_language_english_summary">System defauwt ^-^</string>
+    <string name="settings_language_enl_title">Enl nya~</string>
+    <string name="settings_language_enl_summary">Vewy cwinge nyash twanswation, hand-cwafted wif smowt paw beans x3</string>
+</resources>

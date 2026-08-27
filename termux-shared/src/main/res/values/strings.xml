@@ -2,13 +2,9 @@
 
 <!DOCTYPE resources [
     <!ENTITY TERMUX_PACKAGE_NAME "com.nyamux">
-    <!ENTITY TERMUX_APP_NAME "Termux">
-    <!ENTITY TERMUX_API_APP_NAME "Termux:API">
-    <!ENTITY TERMUX_BOOT_APP_NAME "Termux:Boot">
-    <!ENTITY TERMUX_FLOAT_APP_NAME "Termux:Float">
-    <!ENTITY TERMUX_STYLING_APP_NAME "Termux:Styling">
-    <!ENTITY TERMUX_TASKER_APP_NAME "Termux:Tasker">
-    <!ENTITY TERMUX_WIDGET_APP_NAME "Termux:Widget">
+    <!ENTITY TERMUX_APP_NAME "Nyamux">
+    <!ENTITY TERMUX_API_APP_NAME "Nyamux:API">
+    <!ENTITY TERMUX_TASKER_APP_NAME "Nyamux:Tasker">
     <!ENTITY TERMUX_PREFIX_DIR_PATH "/data/data/com.nyamux/files/usr">
     ]>
 

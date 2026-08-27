@@ -62,7 +62,6 @@ import java.io.File
  *      - Add `*KEY_TERMINAL_MARGIN_HORIZONTAL*` and `*KEY_TERMINAL_MARGIN_VERTICAL*`.
  *
  * - 0.14.0 (2021-09-02)
- *      - Add `getTermuxFloatPropertiesFile()`.
  *
  * - 0.15.0 (2021-09-05)
  *      - Add `KEY_EXTRA_KEYS_TEXT_ALL_CAPS`.

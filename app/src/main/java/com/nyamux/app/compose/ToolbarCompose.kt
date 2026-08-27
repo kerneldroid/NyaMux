@@ -21,11 +21,13 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
+import com.nyamux.R
 import com.nyamux.app.TermuxActivity
 import com.nyamux.shared.termux.extrakeys.ExtraKeyButton
 import com.nyamux.shared.termux.extrakeys.ExtraKeysInfo
@@ -313,7 +315,7 @@ fun ExtraKeyButtonView(
                 Spacer(modifier = Modifier.width(4.dp))
                 Icon(
                     imageVector = Icons.Rounded.Lock,
-                    contentDescription = "Locked",
+                    contentDescription = stringResource(R.string.toolbar_locked),
                     modifier = Modifier.size(10.dp),
                     tint = MaterialTheme.colorScheme.onSecondaryContainer
                 )
@@ -367,7 +369,7 @@ fun TextInputPage(
         IconButton(onClick = onBackToKeys) {
             Icon(
                 imageVector = Icons.Rounded.Keyboard,
-                contentDescription = "Show Keys",
+                contentDescription = stringResource(R.string.toolbar_show_keys),
                 tint = MaterialTheme.colorScheme.primary
             )
         }
@@ -382,7 +384,7 @@ fun TextInputPage(
                 .weight(1f)
                 .focusRequester(focusRequester),
             textStyle = MaterialTheme.typography.bodyMedium,
-            placeholder = { Text("Send to terminal...") },
+            placeholder = { Text(stringResource(R.string.toolbar_send_hint)) },
             singleLine = true,
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
@@ -427,7 +429,7 @@ fun TextInputPage(
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Rounded.Send,
-                contentDescription = "Send",
+                contentDescription = stringResource(R.string.toolbar_send),
                 tint = MaterialTheme.colorScheme.primary
             )
         }

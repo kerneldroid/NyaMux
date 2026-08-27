@@ -9,7 +9,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.ServiceConnection
-import android.net.Uri
 import android.os.Bundle
 import android.os.IBinder
 import android.view.ContextMenu
@@ -652,7 +651,6 @@ class TermuxActivity : AppCompatActivity(), ServiceConnection {
             Menu.NONE,
             resources.getString(R.string.action_kill_process, currentSession.pid)
         ).isEnabled = currentSession.isRunning
-        menu.add(Menu.NONE, CONTEXT_MENU_STYLING_ID, Menu.NONE, R.string.action_style_terminal)
         menu.add(Menu.NONE, CONTEXT_MENU_TOGGLE_KEEP_SCREEN_ON, Menu.NONE, R.string.action_toggle_keep_screen_on)
             .setCheckable(true)
             .setChecked(mPreferences?.shouldKeepScreenOn() == true)
@@ -697,10 +695,6 @@ class TermuxActivity : AppCompatActivity(), ServiceConnection {
             }
             CONTEXT_MENU_KILL_PROCESS_ID -> {
                 showKillSessionDialog(session)
-                true
-            }
-            CONTEXT_MENU_STYLING_ID -> {
-                showStylingDialog()
                 true
             }
             CONTEXT_MENU_TOGGLE_KEEP_SCREEN_ON -> {
@@ -750,34 +744,6 @@ class TermuxActivity : AppCompatActivity(), ServiceConnection {
             showToast(resources.getString(R.string.msg_terminal_reset), true)
 
             mTermuxTerminalSessionActivityClient?.onResetTerminalSession()
-        }
-    }
-
-    fun showStylingDialog() {
-        val stylingIntent = Intent().apply {
-            setClassName(
-                TermuxConstants.TERMUX_STYLING_PACKAGE_NAME,
-                TermuxConstants.TERMUX_STYLING_APP.TERMUX_STYLING_ACTIVITY_NAME
-            )
-        }
-        try {
-            startActivity(stylingIntent)
-        } catch (e: Exception) {
-            // The startActivity() call is not documented to throw IllegalArgumentException.
-            // However, crash reporting shows that it sometimes does, so catch it here.
-            AlertDialog.Builder(this)
-                .setMessage(getString(R.string.error_styling_not_installed))
-                .setPositiveButton(R.string.action_styling_install) { _, _ ->
-                    ActivityUtils.startActivity(
-                        this,
-                        Intent(
-                            Intent.ACTION_VIEW,
-                            Uri.parse(TermuxConstants.TERMUX_STYLING_FDROID_PACKAGE_URL)
-                        )
-                    )
-                }
-                .setNegativeButton(android.R.string.cancel, null)
-                .show()
         }
     }
 
@@ -1026,7 +992,6 @@ class TermuxActivity : AppCompatActivity(), ServiceConnection {
         private const val CONTEXT_MENU_AUTOFILL_PASSWORD = 2
         private const val CONTEXT_MENU_RESET_TERMINAL_ID = 3
         private const val CONTEXT_MENU_KILL_PROCESS_ID = 4
-        private const val CONTEXT_MENU_STYLING_ID = 5
         private const val CONTEXT_MENU_TOGGLE_KEEP_SCREEN_ON = 6
         private const val CONTEXT_MENU_HELP_ID = 7
         private const val CONTEXT_MENU_SETTINGS_ID = 8

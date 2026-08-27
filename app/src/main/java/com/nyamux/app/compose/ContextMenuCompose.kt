@@ -13,7 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.window.Dialog
+import com.nyamux.R
 import com.nyamux.app.TermuxActivity
 import com.nyamux.app.activities.HelpActivity
 import com.nyamux.app.activities.SettingsActivity
@@ -55,7 +57,7 @@ fun ContextMenuOverlay(
                     .padding(16.dp)
             ) {
                 Text(
-                    text = "Terminal Actions",
+                    text = stringResource(R.string.ctx_title),
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.padding(bottom = 16.dp, start = 8.dp)
@@ -72,7 +74,7 @@ fun ContextMenuOverlay(
                         ActionGroupCard {
                             ContextMenuItem(
                                 icon = Icons.Rounded.Link,
-                                label = "Select URL",
+                                label = stringResource(R.string.action_select_url),
                                 onClick = {
                                     stateHolder.isVisible = false
                                     activity.mTermuxTerminalViewClient?.showUrlSelection()
@@ -80,7 +82,7 @@ fun ContextMenuOverlay(
                             )
                             ContextMenuItem(
                                 icon = Icons.Rounded.Share,
-                                label = "Share transcript",
+                                label = stringResource(R.string.action_share_transcript),
                                 onClick = {
                                     stateHolder.isVisible = false
                                     activity.mTermuxTerminalViewClient?.shareSessionTranscript()
@@ -89,7 +91,7 @@ fun ContextMenuOverlay(
                             if (stateHolder.selectedText.isNotEmpty()) {
                                 ContextMenuItem(
                                     icon = Icons.Rounded.ContentCopy,
-                                    label = "Share selected text",
+                                    label = stringResource(R.string.action_share_selected_text),
                                     onClick = {
                                         stateHolder.isVisible = false
                                         activity.mTermuxTerminalViewClient?.shareSelectedText()
@@ -105,7 +107,7 @@ fun ContextMenuOverlay(
                             ActionGroupCard {
                                 ContextMenuItem(
                                     icon = Icons.Rounded.Person,
-                                    label = "Autofill username",
+                                    label = stringResource(R.string.action_autofill_username),
                                     onClick = {
                                         stateHolder.isVisible = false
                                         activity.terminalView?.requestAutoFillUsername()
@@ -113,7 +115,7 @@ fun ContextMenuOverlay(
                                 )
                                 ContextMenuItem(
                                     icon = Icons.Rounded.VpnKey,
-                                    label = "Autofill password",
+                                    label = stringResource(R.string.action_autofill_password),
                                     onClick = {
                                         stateHolder.isVisible = false
                                         activity.terminalView?.requestAutoFillPassword()
@@ -128,7 +130,7 @@ fun ContextMenuOverlay(
                         ActionGroupCard {
                             ContextMenuItem(
                                 icon = Icons.Rounded.RestartAlt,
-                                label = "Reset terminal",
+                                label = stringResource(R.string.ctx_reset_terminal),
                                 onClick = {
                                     stateHolder.isVisible = false
                                     activity.onResetTerminalSession(activity.currentSession)
@@ -136,7 +138,7 @@ fun ContextMenuOverlay(
                             )
                             ContextMenuItem(
                                 icon = Icons.Rounded.Cancel,
-                                label = if (stateHolder.pid > 0) "Kill process (${stateHolder.pid})" else "Kill process",
+                                label = if (stateHolder.pid > 0) stringResource(R.string.action_kill_process, stateHolder.pid) else stringResource(R.string.ctx_kill_process),
                                 enabled = stateHolder.isSessionRunning,
                                 onClick = {
                                     stateHolder.isVisible = false
@@ -145,7 +147,7 @@ fun ContextMenuOverlay(
                             )
                             ContextMenuItem(
                                 icon = Icons.Rounded.LightMode,
-                                label = "Keep screen on",
+                                label = stringResource(R.string.action_toggle_keep_screen_on),
                                 onClick = {
                                     activity.toggleKeepScreenOn()
                                     stateHolder.isKeepScreenOn = !stateHolder.isKeepScreenOn
@@ -167,16 +169,8 @@ fun ContextMenuOverlay(
                     item {
                         ActionGroupCard {
                             ContextMenuItem(
-                                icon = Icons.Rounded.Palette,
-                                label = "Style",
-                                onClick = {
-                                    stateHolder.isVisible = false
-                                    activity.showStylingDialog()
-                                }
-                            )
-                            ContextMenuItem(
                                 icon = Icons.Rounded.Help,
-                                label = "Help",
+                                label = stringResource(R.string.action_open_help),
                                 onClick = {
                                     stateHolder.isVisible = false
                                     activity.startActivity(Intent(activity, HelpActivity::class.java))
@@ -184,7 +178,7 @@ fun ContextMenuOverlay(
                             )
                             ContextMenuItem(
                                 icon = Icons.Rounded.Settings,
-                                label = "Settings",
+                                label = stringResource(R.string.action_open_settings),
                                 onClick = {
                                     stateHolder.isVisible = false
                                     activity.startActivity(Intent(activity, SettingsActivity::class.java))
@@ -192,7 +186,7 @@ fun ContextMenuOverlay(
                             )
                             ContextMenuItem(
                                 icon = Icons.Rounded.BugReport,
-                                label = "Report Issue",
+                                label = stringResource(R.string.action_report_issue),
                                 onClick = {
                                     stateHolder.isVisible = false
                                     activity.mTermuxTerminalViewClient?.reportIssueFromTranscript()
