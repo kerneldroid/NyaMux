@@ -19,6 +19,7 @@ import com.nyamux.shared.termux.TermuxConstants
 import com.nyamux.shared.termux.TermuxConstants.TERMUX_APP
 import com.nyamux.shared.termux.TermuxConstants.TERMUX_APP.TERMUX_SERVICE
 import com.nyamux.shared.termux.interact.TextInputDialogUtils
+import com.nyamux.shared.file.FileUtils
 import com.nyamux.shared.termux.settings.properties.TermuxAppSharedProperties
 import java.io.ByteArrayInputStream
 import java.io.File
@@ -200,13 +201,29 @@ class FileReceiverActivity : AppCompatActivity() {
             return null
         }
 
+        val sanitized = FileUtils.sanitizeFileName(attachmentFileName!!.trim(), false, false) ?: ""
+        if (sanitized.isEmpty() || sanitized == "." || sanitized == ".." || sanitized.contains("/") || sanitized.contains("\\")) {
+            showErrorDialogAndQuit("Invalid file name")
+            return null
+        }
+
         if (!receiveDir.isDirectory && !receiveDir.mkdirs()) {
             showErrorDialogAndQuit("Cannot create directory: " + receiveDir.absolutePath)
             return null
         }
 
         return try {
-            val outFile = File(receiveDir, attachmentFileName)
+            val outFile = File(receiveDir, sanitized)
+            val canonicalDir = receiveDir.canonicalPath
+            val canonicalOut = outFile.canonicalPath
+            if (!(canonicalOut == canonicalDir || canonicalOut.startsWith("$canonicalDir/"))) {
+                showErrorDialogAndQuit("Invalid file path")
+                return null
+            }
+            if (outFile.exists() && outFile.isDirectory) {
+                showErrorDialogAndQuit("A directory with the same name already exists")
+                return null
+            }
             FileOutputStream(outFile).use { f ->
                 val buffer = ByteArray(4096)
                 var readBytes: Int

@@ -804,7 +804,7 @@ class TermuxService : Service(), AppShell.AppShellClient, TermuxSession.TermuxSe
 
         // Set pending intent to be launched when notification is clicked
         val notificationIntent = TermuxActivity.newInstance(this)
-        val contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0)
+        val contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
         // Set notification text
         val sessionCount = termuxSessionsSize
@@ -849,7 +849,7 @@ class TermuxService : Service(), AppShell.AppShellClient, TermuxSession.TermuxSe
         builder.addAction(
             android.R.drawable.ic_delete,
             res.getString(R.string.notification_action_exit),
-            PendingIntent.getService(this, 0, exitIntent, 0)
+            PendingIntent.getService(this, 0, exitIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         )
 
         // Set Wakelock button actions
@@ -857,7 +857,7 @@ class TermuxService : Service(), AppShell.AppShellClient, TermuxSession.TermuxSe
         val toggleWakeLockIntent = Intent(this, TermuxService::class.java).setAction(newWakeAction)
         val actionTitle = res.getString(if (wakeLockHeld) R.string.notification_action_wake_unlock else R.string.notification_action_wake_lock)
         val actionIcon = if (wakeLockHeld) android.R.drawable.ic_lock_idle_lock else android.R.drawable.ic_lock_lock
-        builder.addAction(actionIcon, actionTitle, PendingIntent.getService(this, 0, toggleWakeLockIntent, 0))
+        builder.addAction(actionIcon, actionTitle, PendingIntent.getService(this, 0, toggleWakeLockIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE))
 
         return builder.build()
     }

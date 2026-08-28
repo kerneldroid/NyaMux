@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE resources [
+    <!ENTITY TERMUX_PACKAGE_NAME "com.nyamux">
+    <!ENTITY TERMUX_APP_NAME "Nyamux">
+    <!ENTITY TERMUX_API_APP_NAME "Nyamux:API">
+    <!ENTITY TERMUX_TASKER_APP_NAME "Nyamux:Tasker">
+    ]>
+
+<resources>
+
+    <string name="application_name">&TERMUX_APP_NAME;</string>
+    <string name="shared_user_label">Пользователь &TERMUX_APP_NAME;</string>
+
+    <!-- Termux RUN_COMMAND permission -->
+    <string name="permission_run_command_label">Выполнение команд в окружении &TERMUX_APP_NAME;</string>
+    <string name="permission_run_command_description">выполнение произвольных команд в окружении &TERMUX_APP_NAME; и доступ к файлам</string>
+
+    <!-- Termux Bootstrap Packages Installation -->
+    <string name="bootstrap_installer_body">Установка bootstrap-пакетов…</string>
+    <string name="bootstrap_error_title">Не удалось установить bootstrap</string>
+    <string name="bootstrap_error_body">&TERMUX_APP_NAME; не удалось установить bootstrap-пакеты.</string>
+    <string name="bootstrap_error_abort">Прервать</string>
+    <string name="bootstrap_error_try_again">Повторить</string>
+    <string name="bootstrap_error_not_primary_user_message">&TERMUX_APP_NAME; может работать только от имени основного пользователя.
+        \nБинарные файлы bootstrap, собранные для &TERMUX_APP_NAME;, имеют жёстко заданный путь $PREFIX и не могут быть установлены по пути, отличному от:\n%1$s.</string>
+    <string name="bootstrap_error_installed_on_portable_sd">&TERMUX_APP_NAME; нельзя установить на портативную/внешнюю/съёмную SD-карту.
+        \nБинарные файлы bootstrap, собранные для &TERMUX_APP_NAME;, имеют жёстко заданный путь $PREFIX и не могут быть установлены по пути, отличному от:\n%1$s.</string>
+
+    <!-- Terminal Sidebar and Shortcuts -->
+    <string name="action_new_session">Новая сессия</string>
+    <string name="action_new_session_failsafe">Аварийный режим</string>
+    <string name="title_max_terminals_reached">Достигнут лимит терминалов</string>
+    <string name="msg_max_terminals_reached">Закройте существующие сессии перед созданием новых.</string>
+
+    <string name="title_rename_session">Имя сессии</string>
+    <string name="action_rename_session_confirm">Применить</string>
+    <string name="title_create_named_session">Новая именованная сессия</string>
+    <string name="action_create_named_session_confirm">Создать</string>
+
+    <string name="action_toggle_soft_keyboard">Клавиатура</string>
+
+    <string name="msg_enabling_terminal_toolbar">Включение панели терминала</string>
+    <string name="msg_disabling_terminal_toolbar">Отключение панели терминала</string>
+
+    <!-- Terminal Popup -->
+    <string name="action_select_url">Выбрать URL</string>
+    <string name="title_select_url_dialog">Нажмите для копирования, удерживайте для открытия</string>
+    <string name="title_select_url_none_found">URL в терминале не найдены.</string>
+    <string name="msg_select_url_copied_to_clipboard">URL скопирован в буфер обмена</string>
+
+    <string name="action_share_transcript">Поделиться транскриптом</string>
+    <string name="title_share_transcript">Транскрипт терминала</string>
+    <string name="title_share_transcript_with">Отправить транскрипт через:</string>
+
+    <string name="action_share_selected_text">Поделиться выделенным текстом</string>
+    <string name="title_share_selected_text">Текст терминала</string>
+    <string name="title_share_selected_text_with">Отправить выделенный текст через:</string>
+
+    <string name="action_autofill_username">Автозаполнение имени</string>
+    <string name="action_autofill_password">Автозаполнение пароля</string>
+
+    <string name="action_reset_terminal">Сбросить</string>
+    <string name="msg_terminal_reset">Терминал сброшен</string>
+
+    <string name="action_kill_process">Завершить процесс (%1$d)</string>
+    <string name="title_confirm_kill_process">Действительно завершить сессию?</string>
+
+    <string name="action_toggle_keep_screen_on">Не выключать экран</string>
+    <string name="action_open_help">Справка</string>
+    <string name="action_open_settings">Настройки</string>
+
+    <string name="action_report_issue">Сообщить о проблеме</string>
+    <string name="msg_generating_report">Формирование отчёта</string>
+    <string name="msg_add_termux_debug_info">Добавить отладочную информацию termux в отчёт?</string>
+
+    <!-- Termux Notifications -->
+    <string name="notification_action_exit">Выход</string>
+    <string name="notification_action_wake_lock">Удержать пробуждение</string>
+    <string name="notification_action_wake_unlock">Снять пробуждение</string>
+
+    <!-- TermuxService -->
+    <string name="error_display_over_other_apps_permission_not_granted_to_start_terminal">&TERMUX_APP_NAME; требуется разрешение «Поверх других приложений» для запуска терминальных сессий из фона на Android >= 10. Выдайте его в Настройки -> Приложения -> &TERMUX_APP_NAME; -> Дополнительно</string>
+    <string name="error_termux_service_invalid_execution_command_runner">Неверный runner команды для TermuxService: `%1$s`</string>
+    <string name="error_termux_service_unsupported_execution_command_runner">Неподдерживаемый runner команды для TermuxService: `%1$s`</string>
+    <string name="error_termux_service_unsupported_execution_command_shell_create_mode">Неподдерживаемый режим создания shell для TermuxService: `%1$s`</string>
+    <string name="error_termux_service_execution_command_shell_name_unset">Имя shell не задано, но передан режим `%1$s`</string>
+
+    <!-- Termux RunCommandService -->
+    <string name="error_run_command_service_invalid_intent_action">Неверное действие Intent для RunCommandService: `%1$s`</string>
+    <string name="error_run_command_service_invalid_execution_command_runner">Неверный runner команды для RunCommandService: `%1$s`</string>
+    <string name="error_run_command_service_mandatory_extra_missing">Отсутствует обязательный параметр для RunCommandService: \"%1$s\"</string>
+    <string name="error_run_command_service_api_help">Подробнее об использовании Intent RUN_COMMAND: %1$s</string>
+
+    <!-- Termux File Receiver -->
+    <string name="title_file_received">Сохранить файл в ~/downloads/</string>
+    <string name="action_file_received_edit">Редактировать</string>
+    <string name="action_file_received_open_directory">Открыть папку</string>
+
+    <!-- Miscellaneous -->
+    <string name="error_termux_service_start_failed_general">Не удалось запустить TermuxService. Проверьте logcat.</string>
+    <string name="error_termux_service_start_failed_bg">Не удалось запустить TermuxService в фоне из-за ограничений Android.</string>
+
+    <!-- Termux Settings -->
+    <string name="title_activity_termux_settings">Настройки &TERMUX_APP_NAME;</string>
+
+    <!-- Termux App Preferences -->
+    <string name="termux_preferences_title">&TERMUX_APP_NAME;</string>
+    <string name="termux_preferences_summary">Настройки приложения &TERMUX_APP_NAME;</string>
+
+        <!-- Debugging Preferences -->
+        <string name="termux_debugging_preferences_title">Отладка</string>
+        <string name="termux_debugging_preferences_summary">Параметры отладки</string>
+
+            <!-- Logging Category -->
+            <string name="termux_logging_header">Логирование</string>
+
+                <!-- Log Level -->
+                <string name="termux_log_level_title">Уровень логирования</string>
+
+                <!-- Terminal View Key Logging -->
+                <string name="termux_terminal_view_key_logging_enabled_title">Логирование клавиш терминала</string>
+                <string name="termux_terminal_view_key_logging_enabled_off">Записи о клавишах терминала не будут сохраняться. (По умолчанию)</string>
+                <string name="termux_terminal_view_key_logging_enabled_on">В logcat будут записи о клавишах терминала. Очень подробно, отключайте в обычной работе — влияет на производительность.</string>
+
+                <!-- Plugin Error Notifications -->
+                <string name="termux_plugin_error_notifications_enabled_title">Уведомления об ошибках плагинов</string>
+                <string name="termux_plugin_error_notifications_enabled_off">Отключить всплывающие сообщения и уведомления об ошибках плагинов.</string>
+                <string name="termux_plugin_error_notifications_enabled_on">Показывать всплывающие сообщения и уведомления об ошибках плагинов. (По умолчанию)</string>
+
+                <!-- Crash Report Notifications -->
+                <string name="termux_crash_report_notifications_enabled_title">Уведомления о сбоях</string>
+                <string name="termux_crash_report_notifications_enabled_off">Отключить уведомления о сбоях.</string>
+                <string name="termux_crash_report_notifications_enabled_on">Показывать уведомления о сбоях. (По умолчанию)</string>
+
+        <!-- Terminal IO Preferences -->
+        <string name="termux_terminal_io_preferences_title">Ввод/вывод терминала</string>
+        <string name="termux_terminal_io_preferences_summary">Параметры ввода/вывода терминала</string>
+
+            <!-- Keyboard Category -->
+            <string name="termux_keyboard_header">Клавиатура</string>
+
+                <!-- Soft Keyboard -->
+                <string name="termux_soft_keyboard_enabled_title">Экранная клавиатура включена</string>
+                <string name="termux_soft_keyboard_enabled_off">Экранная клавиатура будет отключена.</string>
+                <string name="termux_soft_keyboard_enabled_on">Экранная клавиатура будет включена. (По умолчанию)</string>
+
+                <!-- Soft Keyboard Only If No Hardware-->
+                <string name="termux_soft_keyboard_enabled_only_if_no_hardware_title">Экранная клавиатура только без физической</string>
+                <string name="termux_soft_keyboard_enabled_only_if_no_hardware_off">Экранная клавиатура будет включена даже при подключённой физической клавиатуре. (По умолчанию)</string>
+                <string name="termux_soft_keyboard_enabled_only_if_no_hardware_on">Экранная клавиатура будет включена только если физическая не подключена.</string>
+
+        <!-- Terminal View Preferences -->
+        <string name="termux_terminal_view_preferences_title">Вид терминала</string>
+        <string name="termux_terminal_view_preferences_summary">Настройки отображения терминала</string>
+
+            <!-- View Category -->
+            <string name="termux_terminal_view_view_header">Вид</string>
+
+                <!-- Terminal View Margin Adjustment -->
+                <string name="termux_terminal_view_terminal_margin_adjustment_title">Коррекция отступов терминала</string>
+                <string name="termux_terminal_view_terminal_margin_adjustment_off">Коррекция отступов отключена.</string>
+                <string name="termux_terminal_view_terminal_margin_adjustment_on">Коррекция отступов включена. Включите, если клавиатура перекрывает дополнительные клавиши/терминал. Если вызывает мерцание — отключите. (По умолчанию)</string>
+
+    <!-- Termux:API App Preferences -->
+    <string name="termux_api_preferences_title">&TERMUX_API_APP_NAME;</string>
+    <string name="termux_api_preferences_summary">Настройки приложения &TERMUX_API_APP_NAME;</string>
+
+    <!-- Termux:Tasker App Preferences -->
+    <string name="termux_tasker_preferences_title">&TERMUX_TASKER_APP_NAME;</string>
+    <string name="termux_tasker_preferences_summary">Настройки приложения &TERMUX_TASKER_APP_NAME;</string>
+
+    <!-- About Preference -->
+    <string name="about_preference_title">О программе</string>
+
+    <!-- Donate Preference -->
+    <string name="donate_preference_title">Поддержать</string>
+
+    <!-- Drawer -->
+    <string name="drawer_sessions">Сессии</string>
+    <string name="drawer_session_fallback_title">Терминал</string>
+    <string name="drawer_action_kill">Завершить</string>
+    <string name="drawer_action_rename">Переименовать</string>
+    <string name="drawer_action_switch_to">Перейти</string>
+    <string name="drawer_action_new">Создать</string>
+    <string name="drawer_rename_dialog_title">Переименовать сессию</string>
+    <string name="drawer_session_name_label">Имя сессии</string>
+
+    <!-- Terminal toolbar -->
+    <string name="toolbar_locked">Заблокировано</string>
+    <string name="toolbar_show_keys">Показать клавиши</string>
+    <string name="toolbar_send_hint">Отправить в терминал…</string>
+    <string name="toolbar_send">Отправить</string>
+
+    <!-- Terminal context menu -->
+    <string name="ctx_title">Действия терминала</string>
+    <string name="ctx_reset_terminal">Сбросить терминал</string>
+    <string name="ctx_kill_process">Завершить процесс</string>
+
+    <!-- Shared actions -->
+    <string name="action_cancel">Отмена</string>
+    <string name="action_back">Назад</string>
+
+    <!-- Settings -->
+    <string name="settings_general_title">Общие</string>
+    <string name="settings_general_summary">Внешний вид, поведение, настройка терминала</string>
+    <string name="settings_debugging_title">Отладка</string>
+    <string name="settings_debugging_summary">Логирование, запись клавиш и уведомления</string>
+    <string name="settings_terminal_io_title">Ввод/вывод</string>
+    <string name="settings_terminal_io_summary">Поведение экранной клавиатуры и ввод</string>
+    <string name="settings_terminal_view_title">Вид терминала</string>
+    <string name="settings_terminal_view_summary">Цвета, отступы, масштабирование</string>
+    <string name="settings_ui_customization_title">Кастомизация интерфейса</string>
+    <string name="settings_ui_customization_summary">Цвета, шрифты, оформление</string>
+    <string name="settings_plugins_header">Плагины</string>
+    <string name="settings_plugin_api_summary">Настройка доступа API</string>
+    <string name="settings_plugin_tasker_summary">Интеграция с Tasker</string>
+    <string name="settings_about_item_title">О приложении &TERMUX_APP_NAME;</string>
+    <string name="settings_about_item_summary">Информация о приложении и устройстве</string>
+    <string name="settings_donate_summary">Поддержать разработку</string>
+    <string name="settings_log_level_unknown">Неизвестно</string>
+    <string name="settings_colors_header">Цвета</string>
+    <string name="settings_use_termux_colors">Использовать цвета Termux</string>
+    <string name="settings_use_termux_colors_on">Используются цвета из темы Termux (.termux/colors.properties)</string>
+    <string name="settings_use_termux_colors_off">Используются системные динамические цвета Material You (Monet)</string>
+    <string name="settings_typography_header">Типографика</string>
+    <string name="settings_font_family_title">Семейство шрифта интерфейса</string>
+    <string name="settings_font_google_sans_code">Google Sans Code (по умолчанию)</string>
+    <string name="settings_font_system">Системный шрифт</string>
+    <string name="settings_font_termux">Шрифт Termux</string>
+
+    <!-- About screen -->
+    <string name="about_title">О программе</string>
+    <string name="about_report_title">О программе</string>
+    <string name="about_version">Версия %1$s</string>
+    <string name="about_diagnostics_header">Диагностика приложения</string>
+    <string name="about_device_header">Информация об устройстве</string>
+    <string name="about_community_header">Сообщество и ссылки</string>
+    <string name="about_github_title">Репозиторий GitHub</string>
+    <string name="about_github_summary">Исходный код и трекер задач</string>
+    <string name="about_wiki_title">Вики Termux</string>
+    <string name="about_wiki_summary">Руководства, советы и документация</string>
+    <string name="about_reddit_title">Сообщество Reddit</string>
+    <string name="about_reddit_summary">Обсуждение и поддержка на r/termux</string>
+    <string name="about_error_app_info">Не удалось загрузить информацию о приложении</string>
+    <string name="about_error_device_info">Не удалось загрузить информацию об устройстве</string>
+
+    <!-- Languages -->
+    <string name="settings_languages_title">Языки</string>
+    <string name="settings_languages_summary">Язык приложения</string>
+    <string name="settings_languages_header">Язык</string>
+    <string name="settings_language_english_title">English</string>
+    <string name="settings_language_english_summary">Системный по умолчанию</string>
+    <string name="settings_language_enl_title">Enl</string>
+    <string name="settings_language_enl_summary">Кринжовый няшный перевод</string>
+    <string name="settings_language_chinese_title">中文</string>
+    <string name="settings_language_chinese_summary">简体中文</string>
+    <string name="settings_language_russian_title">Русский</string>
+    <string name="settings_language_russian_summary">Русский язык</string>
+</resources>

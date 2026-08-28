@@ -75,7 +75,7 @@
     <string name="action_reset_terminal">Weset (╯°□°)╯</string>
     <string name="msg_terminal_reset">Tewminaw weset (•̀ᴗ•́)و</string>
 
-    <string name="action_kill_process">Kiwll pwocess (%d) (｡•̀ᴗ-)✧</string>
+    <string name="action_kill_process">Kiwll pwocess (%1$d) (｡•̀ᴗ-)✧</string>
     <string name="title_confirm_kill_process">Weawwy kiww dis session? (◕‿◕)</string>
 
     <string name="action_toggle_keep_screen_on">Keep scween on uwu</string>
@@ -308,4 +308,8 @@
     <string name="settings_language_english_summary">System defauwt ^-^</string>
     <string name="settings_language_enl_title">Enl nya~</string>
     <string name="settings_language_enl_summary">Vewy cwinge nyash twanswation, hand-cwafted wif smowt paw beans x3</string>
+    <string name="settings_language_chinese_title">中文 nya~</string>
+    <string name="settings_language_chinese_summary">简体中文 x3</string>
+    <string name="settings_language_russian_title">Русский uwu</string>
+    <string name="settings_language_russian_summary">Русский язык :3</string>
 </resources>

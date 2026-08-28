@@ -23,29 +23,27 @@ import androidx.compose.runtime.*
 import androidx.core.os.LocaleListCompat
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.nyamux.R
+import com.nyamux.app.models.UserAction
 import com.nyamux.shared.activities.ReportActivity
+import com.nyamux.shared.android.AndroidUtils
 import com.nyamux.shared.android.PackageUtils
 import com.nyamux.shared.file.FileUtils
 import com.nyamux.shared.interact.ShareUtils
+import com.nyamux.shared.logger.Logger
 import com.nyamux.shared.models.ReportInfo
-import com.nyamux.app.models.UserAction
-import com.nyamux.R
-import com.nyamux.shared.android.AndroidUtils
 import com.nyamux.shared.termux.TermuxConstants
 import com.nyamux.shared.termux.TermuxUtils
 import com.nyamux.shared.termux.settings.preferences.TermuxAPIAppSharedPreferences
-import com.nyamux.shared.termux.settings.preferences.TermuxTaskerAppSharedPreferences
 import com.nyamux.shared.termux.settings.preferences.TermuxAppSharedPreferences
-import com.nyamux.shared.logger.Logger
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.graphics.Color
-import kotlinx.coroutines.delay
+import com.nyamux.shared.termux.settings.preferences.TermuxTaskerAppSharedPreferences
 
 enum class SettingsScreen {
     MAIN, TERMUX, DEBUGGING, TERMINAL_IO, TERMINAL_VIEW, UI_CUSTOMIZATION, LANGUAGES, ABOUT
@@ -312,13 +310,21 @@ fun TermuxSettingsScreen(activity: Activity) {
 @Composable
 fun LanguagesSettingsScreen(activity: Activity) {
     val currentTag = AppCompatDelegate.getApplicationLocales().toLanguageTags()
-    val selected = remember(currentTag) { if (currentTag == "enl") "enl" else "en" }
+    val selected = remember(currentTag) {
+        when {
+            currentTag == "enl" -> "enl"
+            currentTag.startsWith("ru") -> "ru"
+            currentTag.startsWith("zh") -> "zh"
+            else -> "en"
+        }
+    }
 
     val onLanguageSelected: (String) -> Unit = { tag ->
-        if (tag == "enl") {
-            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("enl"))
-        } else {
-            AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList())
+        when (tag) {
+            "enl" -> AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("enl"))
+            "ru" -> AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("ru"))
+            "zh" -> AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("zh-CN"))
+            else -> AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList())
         }
     }
 
@@ -342,6 +348,20 @@ fun LanguagesSettingsScreen(activity: Activity) {
                     summary = stringResource(R.string.settings_language_enl_summary),
                     selected = selected == "enl",
                     onClick = { onLanguageSelected("enl") }
+                )
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+                LanguageOptionRow(
+                    title = stringResource(R.string.settings_language_russian_title),
+                    summary = stringResource(R.string.settings_language_russian_summary),
+                    selected = selected == "ru",
+                    onClick = { onLanguageSelected("ru") }
+                )
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+                LanguageOptionRow(
+                    title = stringResource(R.string.settings_language_chinese_title),
+                    summary = stringResource(R.string.settings_language_chinese_summary),
+                    selected = selected == "zh",
+                    onClick = { onLanguageSelected("zh") }
                 )
             }
         }
