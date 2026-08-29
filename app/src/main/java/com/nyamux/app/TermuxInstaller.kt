@@ -120,6 +120,9 @@ internal object TermuxInstaller {
                     LOG_TAG,
                     "The termux prefix directory \"$TERMUX_PREFIX_DIR_PATH\" exists but is empty or only contains specific unimportant files."
                 )
+            } else if (isPrefixStale()) {
+                Logger.logInfo(LOG_TAG, "Stale prefix detected (contains com.termux), reinstalling bootstrap")
+                FileUtils.deleteFile("termux prefix directory", TERMUX_PREFIX_DIR_PATH, true)
             } else {
                 whenDone.run()
                 return
@@ -237,8 +240,15 @@ internal object TermuxInstaller {
                         throw RuntimeException("No SYMLINKS.txt encountered")
                     }
                     for (symlink in symlinks) {
-                        Os.symlink(symlink.first, symlink.second)
+                        var old = symlink.first
+                        if (old.contains("com.termux")) {
+                            old = old.replace("com.termux", "com.nyamux")
+                        }
+                        Os.symlink(old, symlink.second)
                     }
+
+                    Logger.logInfo(LOG_TAG, "Patching bootstrap prefix com.termux -> com.nyamux")
+                    patchPrefixInStaging()
 
                     Logger.logInfo(LOG_TAG, "Moving termux prefix staging to prefix directory.")
 
@@ -418,6 +428,49 @@ internal object TermuxInstaller {
                 }
             }
         }.start()
+    }
+
+    private fun isPrefixStale(): Boolean {
+        return try {
+            val login = File(TERMUX_PREFIX_DIR_PATH, "bin/login")
+            if (!login.isFile) return false
+            val bytes = login.readBytes()
+            val needle = "com.termux".toByteArray()
+            outer@ for (i in 0..bytes.size - needle.size) {
+                for (j in needle.indices) if (bytes[i + j] != needle[j]) continue@outer
+                return true
+            }
+            false
+        } catch (_: Exception) { false }
+    }
+
+    private fun patchPrefixInStaging() {
+        val oldBytes = "com.termux".toByteArray()
+        val newBytes = "com.nyamux".toByteArray()
+        val staging = File(TERMUX_STAGING_PREFIX_DIR_PATH)
+        if (!staging.isDirectory) return
+        staging.walkTopDown().forEach { f ->
+            if (!f.isFile) return@forEach
+            try {
+                if (f.length() > 20 * 1024 * 1024) return@forEach
+                val bytes = f.readBytes()
+                var mutated = false
+                var i = 0
+                while (i <= bytes.size - oldBytes.size) {
+                    var match = true
+                    for (j in oldBytes.indices) if (bytes[i + j] != oldBytes[j]) { match = false; break }
+                    if (match) {
+                        for (j in newBytes.indices) bytes[i + j] = newBytes[j]
+                        if (newBytes.size < oldBytes.size) bytes[i + newBytes.size] = 0
+                        mutated = true
+                        i += oldBytes.size
+                    } else i++
+                }
+                if (mutated) {
+                    FileOutputStream(f).use { it.write(bytes) }
+                }
+            } catch (_: Exception) { }
+        }
     }
 
     private fun ensureDirectoryExists(directory: File): Error? {
