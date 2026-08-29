@@ -298,6 +298,8 @@ class TerminalView @JvmOverloads constructor(
         mScroller = Scroller(context)
         val am = context.getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
         mAccessibilityEnabled = am.isEnabled
+        isFocusableInTouchMode = true
+        setLayerType(LAYER_TYPE_NONE, null)
     }
 
     /**
@@ -528,9 +530,10 @@ class TerminalView @JvmOverloads constructor(
 
         mEmulator!!.clearScrollCounter()
 
-        invalidate()
+        postInvalidateOnAnimation()
         if (mAccessibilityEnabled) {
-            contentDescription = getText()
+            val newText = getText()
+            if (contentDescription != newText) contentDescription = newText
         }
     }
 
@@ -1232,17 +1235,16 @@ class TerminalView @JvmOverloads constructor(
 
         override fun run() {
             try {
-                if (mEmulator != null) {
-                    // Toggle the blink state and then invalidate() the view so
-                    // that onDraw() is called, which then calls TerminalRenderer.render()
-                    // which checks with TerminalEmulator.shouldCursorBeVisible() to decide whether
-                    // to draw the cursor or not
+                if (mEmulator != null && isAttachedToWindow && mEmulator!!.shouldCursorBeVisible()) {
                     mCursorVisible = !mCursorVisible
                     mEmulator!!.setCursorBlinkState(mCursorVisible)
-                    invalidate()
+                    val visible = mEmulator!!.getCursorRow() + mTopRow in 0 until (mEmulator!!.mRows)
+                    if (visible) postInvalidateOnAnimation()
+                } else if (mEmulator != null) {
+                    mCursorVisible = !mCursorVisible
+                    mEmulator!!.setCursorBlinkState(mCursorVisible)
                 }
             } finally {
-                // Recall the Runnable after mBlinkRate milliseconds to toggle the blink state
                 mTerminalCursorBlinkerHandler?.postDelayed(this, mBlinkRate.toLong())
             }
         }

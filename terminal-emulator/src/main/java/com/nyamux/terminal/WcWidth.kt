@@ -514,8 +514,11 @@ object WcWidth {
     /** Return the terminal display width of a code point: 0, 1 or 2. */
     @JvmStatic
     fun width(ucs: Int): Int {
-        if (ucs == 0 ||
-            ucs == 0x034F ||
+        if (ucs < 32) return 0
+        if (ucs == 127) return 0
+        if (ucs < 127) return 1
+        if (ucs < 160) return 0
+        if (ucs == 0x034F ||
             ucs in 0x200B..0x200F ||
             ucs == 0x2028 ||
             ucs == 0x2029 ||
@@ -523,10 +526,6 @@ object WcWidth {
             ucs in 0x2060..0x2063) {
             return 0
         }
-
-        // C0/C1 control characters
-        // Termux change: Return 0 instead of -1.
-        if (ucs < 32 || ucs in 0x07F until 0x0A0) return 0
 
         // combining characters with zero width
         if (intable(ZERO_WIDTH, ucs)) return 0

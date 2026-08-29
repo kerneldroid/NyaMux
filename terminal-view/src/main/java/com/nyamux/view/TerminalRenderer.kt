@@ -4,6 +4,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.Typeface
+import android.util.LruCache
 import com.nyamux.terminal.TerminalBuffer
 import com.nyamux.terminal.TerminalEmulator
 import com.nyamux.terminal.TerminalRow
@@ -40,11 +41,29 @@ class TerminalRenderer(
     val mFontLineSpacingAndAscent: Int
 
     private val asciiMeasures = FloatArray(127)
+    private val widthCache = LruCache<Int, Float>(512)
+    private val paintCache = LruCache<Int, Paint>(16)
+
+    private fun paintFor(flags: Int): Paint {
+        var p = paintCache.get(flags)
+        if (p == null) {
+            p = Paint(mTextPaint).apply {
+                isFakeBoldText = (flags and 1) != 0
+                textSkewX = if ((flags and 2) != 0) -0.35f else 0f
+                isUnderlineText = (flags and 4) != 0
+                isStrikeThruText = (flags and 8) != 0
+            }
+            paintCache.put(flags, p)
+        }
+        return p
+    }
 
     init {
         mTextPaint.typeface = mTypeface
         mTextPaint.isAntiAlias = true
         mTextPaint.textSize = mTextSize.toFloat()
+        mTextPaint.isSubpixelText = false
+        mTextPaint.isFilterBitmap = false
 
         mFontLineSpacing = ceil(mTextPaint.fontSpacing.toDouble()).toInt()
         mFontAscent = ceil(mTextPaint.ascent().toDouble()).toInt()
@@ -124,7 +143,12 @@ class TerminalRenderer(
                 val measuredCodePointWidth = if (codePoint < asciiMeasures.size) {
                     asciiMeasures[codePoint]
                 } else {
-                    mTextPaint.measureText(line, currentCharIndex, charsForCodePoint)
+                    val cached = widthCache.get(codePoint)
+                    if (cached != null) cached else {
+                        val w = mTextPaint.measureText(line, currentCharIndex, charsForCodePoint)
+                        widthCache.put(codePoint, w)
+                        w
+                    }
                 }
                 val fontWidthMismatch = abs(measuredCodePointWidth / mFontWidth - codePointWcWidth) > 0.01f
 
@@ -250,14 +274,16 @@ class TerminalRenderer(
                 foreColor = 0xff000000.toInt() or (red shl 16) or (green shl 8) or blue
             }
 
-            mTextPaint.isFakeBoldText = bold
-            mTextPaint.isUnderlineText = underline
-            mTextPaint.textSkewX = if (italic) -0.35f else 0.0f
-            mTextPaint.isStrikeThruText = strikeThrough
-            mTextPaint.color = foreColor
+            var flags = 0
+            if (bold) flags = flags or 1
+            if (italic) flags = flags or 2
+            if (underline) flags = flags or 4
+            if (strikeThrough) flags = flags or 8
+            val paint = if (flags == 0) mTextPaint else paintFor(flags)
+            paint.color = foreColor
 
             // The text alignment is the default Paint.Align.LEFT.
-            canvas.drawTextRun(text, startCharIndex, runWidthChars, startCharIndex, runWidthChars, left, y - mFontLineSpacingAndAscent, false, mTextPaint)
+            canvas.drawTextRun(text, startCharIndex, runWidthChars, startCharIndex, runWidthChars, left, y - mFontLineSpacingAndAscent, false, paint)
         }
 
         if (savedMatrix) canvas.restore()

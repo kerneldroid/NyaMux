@@ -371,6 +371,7 @@ class TermuxActivity : AppCompatActivity(), ServiceConnection {
             return
         }
 
+        GpuAccelHelper.applyIfEnabled(this, false)
         // Send the {@link TermuxConstants#BROADCAST_TERMUX_OPENED} broadcast to notify apps that Termux
         // app has been opened.
         TermuxUtils.sendTermuxOpenedBroadcast(this)
