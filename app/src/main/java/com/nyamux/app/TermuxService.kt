@@ -308,13 +308,11 @@ class TermuxService : Service(), AppShell.AppShellClient, TermuxSession.TermuxSe
         Logger.logDebug(LOG_TAG, "Acquiring WakeLocks")
 
         val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
-        mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TermuxConstants.TERMUX_APP_NAME.lowercase() + ":service-wakelock")
-        mWakeLock?.acquire()
+        mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TermuxConstants.TERMUX_APP_NAME.lowercase() + ":service-wakelock").apply { acquire() }
 
         // http://tools.android.com/tech-docs/lint-in-studio-2-3#TOC-WifiManager-Leak
         val wm = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        mWifiLock = wm.createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, TermuxConstants.TERMUX_APP_NAME.lowercase())
-        mWifiLock?.acquire()
+        mWifiLock = wm.createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, TermuxConstants.TERMUX_APP_NAME.lowercase()).apply { acquire() }
 
         if (!PermissionUtils.checkIfBatteryOptimizationsDisabled(this)) {
             PermissionUtils.requestDisableBatteryOptimizations(this)

@@ -49,36 +49,30 @@ object Logger {
 
     @JvmStatic
     fun logStackTraceWithMessage(client: TerminalSessionClient?, tag: String, message: String, throwable: Throwable) {
-        logError(client, tag, getMessageAndStackTraceString(message, throwable)!!)
+        getMessageAndStackTraceString(message, throwable)?.let { logError(client, tag, it) }
     }
 
     @JvmStatic
-    fun getMessageAndStackTraceString(message: String?, throwable: Throwable?): String? {
-        return when {
-            message == null && throwable == null -> null
-            message != null && throwable != null -> message + ":\n" + getStackTraceString(throwable)
-            throwable == null -> message
-            else -> getStackTraceString(throwable)
-        }
+    fun getMessageAndStackTraceString(message: String?, throwable: Throwable?): String? = when {
+        message == null && throwable == null -> null
+        message != null && throwable != null -> message + ":\n" + getStackTraceString(throwable)
+        throwable == null -> message
+        else -> getStackTraceString(throwable)
     }
 
     @JvmStatic
     fun getStackTraceString(throwable: Throwable?): String? {
         if (throwable == null) return null
-
-        var stackTraceString: String? = null
-
-        try {
-            val errors = StringWriter()
-            val pw = PrintWriter(errors)
-            throwable.printStackTrace(pw)
-            pw.close()
-            stackTraceString = errors.toString()
-            errors.close()
+        return try {
+            StringWriter().use { sw ->
+                PrintWriter(sw).use { pw ->
+                    throwable.printStackTrace(pw)
+                    sw.toString()
+                }
+            }
         } catch (e: IOException) {
             e.printStackTrace()
+            null
         }
-
-        return stackTraceString
     }
 }

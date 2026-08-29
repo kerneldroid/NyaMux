@@ -69,7 +69,7 @@ class TerminalColorScheme {
     }
 
     private fun reset() {
-        System.arraycopy(DEFAULT_COLORSCHEME, 0, mDefaultColors, 0, TextStyle.NUM_INDEXED_COLORS)
+        DEFAULT_COLORSCHEME.copyInto(mDefaultColors, endIndex = TextStyle.NUM_INDEXED_COLORS)
     }
 
     fun updateWith(props: Properties) {
@@ -121,11 +121,7 @@ class TerminalColorScheme {
         val backgroundColor = mDefaultColors[TextStyle.COLOR_INDEX_BACKGROUND]
         val brightness = TerminalColors.getPerceivedBrightnessOfColor(backgroundColor)
         if (brightness > 0) {
-            if (brightness < 130) {
-                mDefaultColors[TextStyle.COLOR_INDEX_CURSOR] = 0xffffffff.toInt()
-            } else {
-                mDefaultColors[TextStyle.COLOR_INDEX_CURSOR] = 0xff000000.toInt()
-            }
+            mDefaultColors[TextStyle.COLOR_INDEX_CURSOR] = if (brightness < 130) 0xffffffff.toInt() else 0xff000000.toInt()
         }
     }
 }
