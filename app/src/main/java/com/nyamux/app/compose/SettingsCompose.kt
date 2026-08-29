@@ -844,7 +844,7 @@ fun AboutSettingsScreen(context: Context) {
                     try {
                         context.packageManager.getPackageInfo(context.packageName, 0).versionName
                     } catch (e: Exception) {
-                        "v0.118.0"
+                        "1.118.5"
                     }
                 }
                 Text(

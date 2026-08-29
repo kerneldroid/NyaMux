@@ -239,8 +239,6 @@ class TermuxActivity : AppCompatActivity(), ServiceConnection {
      */
     private var mIsInvalidState = false
 
-    private var mNavBarHeight = 0
-
     private var mTerminalToolbarDefaultHeight = 0f
 
     @JvmField
@@ -390,10 +388,6 @@ class TermuxActivity : AppCompatActivity(), ServiceConnection {
 
         mTermuxTerminalViewClient?.onStart()
 
-        if (preferences.isTerminalMarginAdjustmentEnabled()) {
-            addTermuxActivityRootViewGlobalLayoutListener()
-        }
-
         registerTermuxActivityBroadcastReceiver()
     }
 
@@ -427,8 +421,6 @@ class TermuxActivity : AppCompatActivity(), ServiceConnection {
         mTermuxTerminalSessionActivityClient?.onStop()
 
         mTermuxTerminalViewClient?.onStop()
-
-        removeTermuxActivityRootViewGlobalLayoutListener()
 
         unregisterTermuxActivityBroadcastReceiver()
         closeDrawer()
@@ -537,18 +529,6 @@ class TermuxActivity : AppCompatActivity(), ServiceConnection {
         AppCompatActivityUtils.setNightMode(this, NightMode.getAppNightMode().name, true)
     }
 
-    private fun setMargins() {
-        // No-op because Compose handles terminal margins dynamically inside TermuxMainScreen
-    }
-
-    fun addTermuxActivityRootViewGlobalLayoutListener() {
-        // No-op because Compose handles keyboard resizing natively with .imePadding()
-    }
-
-    fun removeTermuxActivityRootViewGlobalLayoutListener() {
-        // No-op
-    }
-
     private fun setTermuxTerminalViewAndClients() {
         // Set termux terminal view and session clients
         mTermuxTerminalSessionActivityClient = TermuxTerminalSessionActivityClient(this)
@@ -592,10 +572,6 @@ class TermuxActivity : AppCompatActivity(), ServiceConnection {
             savedTextInput = savedInstanceState.getString(ARG_TERMINAL_TOOLBAR_TEXT_INPUT)
             mToolbarTextInput = savedTextInput ?: ""
         }
-    }
-
-    private fun setTerminalToolbarHeight() {
-        // Compose uses wrap_content and dynamically adjusts height to its children
     }
 
     fun toggleTerminalToolbar() {
@@ -824,12 +800,6 @@ class TermuxActivity : AppCompatActivity(), ServiceConnection {
         }
     }
 
-    val navBarHeight: Int
-        get() = mNavBarHeight
-
-    @JvmName("getNavBarHeight_compat")
-    fun getNavBarHeight(): Int = navBarHeight
-
     val terminalToolbarDefaultHeight: Float
         get() = mTerminalToolbarDefaultHeight
 
@@ -966,9 +936,6 @@ class TermuxActivity : AppCompatActivity(), ServiceConnection {
             // Update NightMode.APP_NIGHT_MODE
             TermuxThemeUtils.setAppNightMode(properties.nightMode)
         }
-
-        setMargins()
-        setTerminalToolbarHeight()
 
         FileReceiverActivity.updateFileReceiverActivityComponentsState(this)
 

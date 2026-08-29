@@ -13,7 +13,7 @@ android {
 
         externalNativeBuild {
             ndkBuild {
-                cFlags "-std=c11", "-Wall", "-Wextra", "-Werror", "-Os", "-fno-stack-protector", "-Wl,--gc-sections"
+                cFlags "-std=c11", "-Wall", "-Wextra", "-Werror", "-Os"
             }
         }
 
@@ -77,7 +77,7 @@ afterEvaluate {
                 from components.default
                 groupId = 'com.nyamux'
                 artifactId = 'terminal-emulator'
-                version = '0.118.0'
+                version = '1.118.5'
                 artifact(sourceJar)
             }
         }
