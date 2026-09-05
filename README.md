@@ -1,3 +1,5 @@
+> **NOTE**: This project is temporarily frozen. It is not in the archive, but Issues and PR will not be considered. 
+
 # NyaMux
 
 Terminal emulator for Android with a Linux command line environment. Fork of [termux/termux-app](https://github.com/termux/termux-app) — entire UI rewritten in Kotlin + Jetpack Compose.
